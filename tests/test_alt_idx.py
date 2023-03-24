@@ -65,6 +65,5 @@ class TestAltIdx(unittest.TestCase):
                 (6.917295379444161, 79.86478500974187),
                 12,
             ],  # Town Hall, Colombo
-            []
         ]:
             self.assertEqual(AltIdx.get(latlng), expected_alt)
