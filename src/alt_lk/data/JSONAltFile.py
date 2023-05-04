@@ -1,13 +1,15 @@
-import os
 
-from utils import JSONFile, Log
+from utils import Log
 
-from alt_lk.core.GeoTIFFFile import GeoTIFFFile
+from alt_lk.data.GeoTIFFFile import GeoTIFFFile
+from alt_lk.data.JSONBaseAltFile import JSONBaseAltFile
 
 log = Log('JSONAltFile')
 
 
-class JSONAltFile:
+class JSONAltFile(JSONBaseAltFile):
+
+
     def __init__(self, latlng: tuple[int, int]):
         self.latlng = latlng
 
@@ -15,22 +17,8 @@ class JSONAltFile:
     def path(self):
         lat, lng = self.latlng
         return f'data/json/N{lat:03d}.E{lng:03d}.json'
-    
-    def buildAndWrite(self):
+
+    def build(self):
         tif = GeoTIFFFile(self.latlng)
-        data = tif.get_data()
-        if data is None:
-            log.error(f'Failed to read {self.path}')
-            return None
-        JSONFile(self.path).write(data)
-        dim_x, dim_y = len(data), len(data[0])
-        log.info(f'Wrote {self.path} ({dim_x} x {dim_y})')
-        return data
-
-    def read(self):
-        if os.path.exists(self.path):
-            return JSONFile(self.path).read()
-        data = self.buildAndWrite()
-        return data
-
-
+        return tif.get_data()
+        

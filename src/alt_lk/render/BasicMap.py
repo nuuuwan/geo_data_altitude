@@ -6,7 +6,7 @@ import imageio
 from PIL import Image
 from utils import Log
 
-from alt_lk.core.JSONAltFile import JSONAltFile
+from alt_lk.data.JSONCombinedAltFile import JSONCombinedAltFile
 
 log = Log('basic_map')
 MIN_ALT, MAX_ALT = 0, 2524
@@ -38,7 +38,7 @@ class BasicMap:
             log.debug(f'{png_path} exists')
             return png_path
 
-        data = JSONAltFile().read()
+        data = JSONCombinedAltFile().read()
         dim_x, dim_y = len(data[0]), len(data)
         img = Image.new('RGB', (dim_x, dim_y))
         pixels = img.load()
@@ -50,26 +50,6 @@ class BasicMap:
         log.info(f'Wrote {png_path}')
         return png_path
 
-    @staticmethod
-    def create_animated_gif():
-        MAX_ALT = 2524
-        images = []
-        for i in range(0, 15):
-            mid_alt = int(MAX_ALT / (2 ** (i / 2)))
-            image_path = BasicMap(mid_alt).write()
-            image = imageio.imread(image_path)
-            image = cv2.resize(image, (800, 1000))
-
-            images.append(image)
-        # mirror
-        n = len(images)
-        for i in range(n):
-            images.append(images[n - i - 1])
-
-        gif_path = 'images/all.gif'
-        imageio.mimsave(gif_path, images, duration=0.2)
-        log.info(f'Wrote {gif_path}')
-
 
 if __name__ == '__main__':
-    BasicMap.create_animated_gif()
+    BasicMap(1000).write()

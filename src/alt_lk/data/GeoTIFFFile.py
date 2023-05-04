@@ -7,6 +7,11 @@ log = Log('GeoTIFFFile')
 
 
 class GeoTIFFFile:
+    @staticmethod
+    def empty_data():
+        DIM = 1201
+        return [[0] * DIM] * DIM
+    
     def __init__(self, latlng: tuple[int, int]):
         self.latlng = latlng
 
@@ -18,8 +23,8 @@ class GeoTIFFFile:
     def get_data(self):
         data = None
         if not os.path.exists(self.path):
-            log.error(f'File not found: {self.path}')
-            return None
+            log.warning(f'File not found: {self.path}. Returning empty matrix.')
+            return GeoTIFFFile.empty_data()
 
         with rasterio.open(self.path) as src:
             data = src.read(1).tolist()
