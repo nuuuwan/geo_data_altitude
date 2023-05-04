@@ -3,6 +3,7 @@ import math
 from functools import cache
 
 import numpy as np
+from scipy.ndimage import maximum_filter
 from utils import Log
 
 from alt_lk.data.JSONCombinedAltFile import JSONCombinedAltFile
@@ -12,6 +13,7 @@ log = Log('matrices')
 
 DIM = 1201
 DIM2 = DIM * 5
+MAX_DISTANCE = 100
 
 PLACE_TO_LATLNG = dict(
     Pidurutalagala=(7.001088543413415, 80.77359079838624),
@@ -145,29 +147,29 @@ def get_perspective(latlng0):
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
             beta0 = m_beta[i_lat, i_lng]
-            if not (MIN_BETA <= beta0 <= MAX_BETA):
+            if not (MIN_BETA < beta0 <= MAX_BETA):
                 continue
             alpha = m_alpha[i_lat, i_lng]
-            if not (MIN_ALPHA <= alpha <= MAX_ALPHA):
+            if not (MIN_ALPHA < alpha <= MAX_ALPHA):
                 continue
 
             i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
             i_y0 = int(DIM_Y * (MAX_BETA - beta0) / (MAX_BETA - MIN_BETA))
             new_val = m_distance[i_lat, i_lng]
-            span_x = int(new_val / 20)
+            span_x = 0
             for i_y in range(i_y0, DIM_Y):
                 for dx in range(-span_x, span_x + 1):
                     i_x = max(min(i_x0 + dx, DIM_X - 1), 0)
                     cur_val = pers[i_y, i_x]
                     if cur_val == 0 or new_val < cur_val:
                         pers[i_y, i_x] = new_val
+    pers = maximum_filter(pers, size=3)
     return pers
 
 
 def get_color_perspective(distance):
-    if distance <= 0:
+    if distance == 0:
         return (0, 128, 255)
-    MAX_DISTANCE = 100
     p_distance = 1 - min(MAX_DISTANCE, distance) / MAX_DISTANCE
     h = 150 * p_distance
     s = 100

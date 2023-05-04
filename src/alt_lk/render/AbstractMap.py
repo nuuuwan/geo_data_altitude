@@ -37,7 +37,9 @@ class AbstractMap:
         pixels = img.load()
         for x in range(dim_x):
             for y in range(dim_y):
-                pixels[x, y] = self.get_color(data[y][x])
+                val = data[y][x]
+                color = self.get_color(val)
 
+                pixels[x, y] = color
         img.save(self.png_path)
         log.info(f'Wrote {self.png_path}')
