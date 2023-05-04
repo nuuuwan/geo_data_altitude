@@ -1,4 +1,3 @@
-
 from utils import Log
 
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
@@ -8,8 +7,6 @@ log = Log('JSONAltFile')
 
 
 class JSONAltFile(JSONBaseAltFile):
-
-
     def __init__(self, latlng: tuple[int, int]):
         self.latlng = latlng
 
@@ -21,4 +18,3 @@ class JSONAltFile(JSONBaseAltFile):
     def build(self):
         tif = GeoTIFFFile(self.latlng)
         return tif.get_data()
-        

@@ -26,5 +26,6 @@ class JSONCombinedAltFile(JSONBaseAltFile):
         matrix_block = np.block(matrix_block)
         return matrix_block.tolist()
 
+
 if __name__ == '__main__':
     JSONCombinedAltFile().write(JSONCombinedAltFile().build())

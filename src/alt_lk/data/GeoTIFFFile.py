@@ -11,7 +11,7 @@ class GeoTIFFFile:
     def empty_data():
         DIM = 1201
         return [[0] * DIM] * DIM
-    
+
     def __init__(self, latlng: tuple[int, int]):
         self.latlng = latlng
 
@@ -23,7 +23,9 @@ class GeoTIFFFile:
     def get_data(self):
         data = None
         if not os.path.exists(self.path):
-            log.warning(f'File not found: {self.path}. Returning empty matrix.')
+            log.warning(
+                f'File not found: {self.path}. Returning empty matrix.'
+            )
             return GeoTIFFFile.empty_data()
 
         with rasterio.open(self.path) as src:
