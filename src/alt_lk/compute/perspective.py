@@ -7,11 +7,10 @@ import numpy as np
 from scipy.ndimage import minimum_filter
 from utils import Log
 
-from alt_lk.compute.BUILDING_TO_LATLNG import BUILDING_TO_LATLNG
 from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
                                      get_latlng_matrix)
-from alt_lk.compute.MOUNTAIN_TO_LATLNG import LATLNG0, MOUNTAIN_TO_LATLNG
+from alt_lk.data.Places import Places
 from alt_lk.render.AbstractMap import AbstractMap
 
 log = Log('matrices')
@@ -94,7 +93,8 @@ def get_perspective(latlng0):
         )
         if peak['beta'] == max_beta:
             min_d = 100
-            for label, latlng_mountain in MOUNTAIN_TO_LATLNG.items():
+            for d in Places.mountains():
+                latlng_mountain = d['latlng']
                 dlat, dlng = (
                     peak['latlng'][0] - latlng_mountain[0],
                     peak['latlng'][1] - latlng_mountain[1],
@@ -118,7 +118,8 @@ def get_perspective(latlng0):
                 break
 
     label_info_list = []
-    for label, latlng in MOUNTAIN_TO_LATLNG.items():
+    for d in Places.mountains():
+        latlng = d['latlng']
         i_lat, i_lng = _(latlng)
         alpha, beta, distance = (
             m_alpha[i_lat, i_lng],
@@ -137,9 +138,10 @@ def get_perspective(latlng0):
         min_distance = pers[y, x]
         icon = '▲'
         if distance < min_distance + 10:
-            label_info_list.append(dict(xy=(x, y), label=icon + label))
+            label_info_list.append(dict(xy=(x, y), label=icon + d['name']))
 
-    for label, latlng in BUILDING_TO_LATLNG.items():
+    for d in Places.buildings():
+        latlng = d['latlng']
         i_lat, i_lng = _(latlng)
         alpha = m_alpha[i_lat, i_lng]
 
@@ -151,7 +153,7 @@ def get_perspective(latlng0):
         y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
         icon = '□'
-        label_info_list.append(dict(xy=(x, y), label=icon + label))
+        label_info_list.append(dict(xy=(x, y), label=icon + d['name']))
 
     return pers, label_info_list
 
@@ -174,5 +176,6 @@ def get_color_perspective(distance):
 
 
 if __name__ == '__main__':
+    LATLNG0 = (6.9188473380988125, 79.85911404345833)
     pers, label_info_list = get_perspective(LATLNG0)
     AbstractMap(pers, get_color_perspective, label_info_list).write()
