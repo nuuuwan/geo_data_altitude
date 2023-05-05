@@ -1,37 +1,9 @@
 [
   {
-    "name": "447 Lunar",
+    "name": "Kelanitissa Power Station",
     "latlng": [
-      6.918754,
-      79.861939
-    ]
-  },
-  {
-    "name": "Academy of Design",
-    "latlng": [
-      6.89505671703449,
-      79.857315109869
-    ]
-  },
-  {
-    "name": "Aitken Spence Tower 2",
-    "latlng": [
-      6.92060698169786,
-      79.8604896945979
-    ]
-  },
-  {
-    "name": "All Saints' Church",
-    "latlng": [
-      6.92088432754778,
-      79.8748990099215
-    ]
-  },
-  {
-    "name": "Altair",
-    "latlng": [
-      6.918889,
-      79.854444
+      6.95276005958952,
+      79.8785695442145
     ]
   },
   {
@@ -42,59 +14,38 @@
     ]
   },
   {
-    "name": "Asiri Central",
+    "name": "World Trade Centre (East)",
     "latlng": [
-      6.92051645236602,
-      79.8657067361455
+      6.932778,
+      79.843611
     ]
   },
   {
-    "name": "Asokaramaya",
+    "name": "Maligakanda Ressevoir",
     "latlng": [
-      6.89108084102836,
-      79.8645739702139
+      6.92807237457999,
+      79.871315803886
     ]
   },
   {
-    "name": "Astoria (Tower 1)",
+    "name": "Lotus Tower",
     "latlng": [
-      6.905833,
-      79.853056
+      6.926944,
+      79.858333
     ]
   },
   {
-    "name": "Bank of Ceylon - Merchant Tower",
+    "name": "One Galle Face",
     "latlng": [
-      6.9125,
-      79.850833
+      6.926667,
+      79.845
     ]
   },
   {
-    "name": "BMICH",
+    "name": "Mahaabodi Temple",
     "latlng": [
-      6.90180635701663,
-      79.8728703422534
-    ]
-  },
-  {
-    "name": "BoC Merchant Tower",
-    "latlng": [
-      6.912715,
-      79.850686
-    ]
-  },
-  {
-    "name": "Capital Heights",
-    "latlng": [
-      6.90933432698744,
-      79.9006574183423
-    ]
-  },
-  {
-    "name": "Cathedral of Christ",
-    "latlng": [
-      6.90378042448941,
-      79.8731724175922
+      6.92662314210955,
+      79.8692987033473
     ]
   },
   {
@@ -105,31 +56,59 @@
     ]
   },
   {
-    "name": "Cinnamon Red",
+    "name": "Sahaspura Flats",
     "latlng": [
-      6.91245054723618,
-      79.8551287242143
+      6.92506989726066,
+      79.8822679435318
     ]
   },
   {
-    "name": "Clearpoint  Res.",
+    "name": "All Saints' Church",
     "latlng": [
-      6.911515,
-      79.905087
+      6.92088432754778,
+      79.8748990099215
     ]
   },
   {
-    "name": "Colombo City Centre",
+    "name": "HNB Tower",
     "latlng": [
-      6.91720151822228,
-      79.8552769915852
+      6.920808,
+      79.862629
     ]
   },
   {
-    "name": "Dept. of Archives",
+    "name": "Aitken Spence Tower 2",
     "latlng": [
-      6.90680156160524,
-      79.8647257636054
+      6.92060698169786,
+      79.8604896945979
+    ]
+  },
+  {
+    "name": "Hilton Res.",
+    "latlng": [
+      6.920556,
+      79.856111
+    ]
+  },
+  {
+    "name": "Asiri Central",
+    "latlng": [
+      6.92051645236602,
+      79.8657067361455
+    ]
+  },
+  {
+    "name": "Prime Splendour",
+    "latlng": [
+      6.91946358796701,
+      79.897891541049
+    ]
+  },
+  {
+    "name": "Altair",
+    "latlng": [
+      6.918889,
+      79.854444
     ]
   },
   {
@@ -140,10 +119,73 @@
     ]
   },
   {
+    "name": "447 Lunar",
+    "latlng": [
+      6.918754,
+      79.861939
+    ]
+  },
+  {
     "name": "Empire (South Tower)",
     "latlng": [
       6.918611,
       79.858333
+    ]
+  },
+  {
+    "name": "The Emperor",
+    "latlng": [
+      6.918611,
+      79.847778
+    ]
+  },
+  {
+    "name": "Parkland",
+    "latlng": [
+      6.91750233807105,
+      79.8588508363899
+    ]
+  },
+  {
+    "name": "The Monarch",
+    "latlng": [
+      6.917222,
+      79.848333
+    ]
+  },
+  {
+    "name": "Colombo City Centre",
+    "latlng": [
+      6.91720151822228,
+      79.8552769915852
+    ]
+  },
+  {
+    "name": "Jetwing Colombo Seven",
+    "latlng": [
+      6.91659798272639,
+      79.8702065057394
+    ]
+  },
+  {
+    "name": "Grand Hyatt",
+    "latlng": [
+      6.915833,
+      79.847778
+    ]
+  },
+  {
+    "name": "The Grand (Prime)",
+    "latlng": [
+      6.91575191706021,
+      79.8719437970399
+    ]
+  },
+  {
+    "name": "Town Hall",
+    "latlng": [
+      6.91565070390756,
+      79.8635093643063
     ]
   },
   {
@@ -161,10 +203,234 @@
     ]
   },
   {
-    "name": "Grand Hyatt",
+    "name": "BoC Merchant Tower",
     "latlng": [
-      6.915833,
-      79.847778
+      6.912715,
+      79.850686
+    ]
+  },
+  {
+    "name": "Bank of Ceylon - Merchant Tower",
+    "latlng": [
+      6.9125,
+      79.850833
+    ]
+  },
+  {
+    "name": "Cinnamon Red",
+    "latlng": [
+      6.91245054723618,
+      79.8551287242143
+    ]
+  },
+  {
+    "name": "Movenpick Hotel",
+    "latlng": [
+      6.91173959028482,
+      79.8506932108289
+    ]
+  },
+  {
+    "name": "Clearpoint  Res.",
+    "latlng": [
+      6.911515,
+      79.905087
+    ]
+  },
+  {
+    "name": "Iconic Galaxy",
+    "latlng": [
+      6.91140684095081,
+      79.9004244747304
+    ]
+  },
+  {
+    "name": "Nelum Pokuna",
+    "latlng": [
+      6.911153,
+      79.863379
+    ]
+  },
+  {
+    "name": "St. Briget's Convent",
+    "latlng": [
+      6.91060004079349,
+      79.8644314273372
+    ]
+  },
+  {
+    "name": "Sheraton ",
+    "latlng": [
+      6.910256,
+      79.850244
+    ]
+  },
+  {
+    "name": "Capital Heights",
+    "latlng": [
+      6.90933432698744,
+      79.9006574183423
+    ]
+  },
+  {
+    "name": "Iconic",
+    "latlng": [
+      6.90753366498618,
+      79.8907071769043
+    ]
+  },
+  {
+    "name": "Dept. of Archives",
+    "latlng": [
+      6.90680156160524,
+      79.8647257636054
+    ]
+  },
+  {
+    "name": "Orwell Res.",
+    "latlng": [
+      6.906389,
+      79.8525
+    ]
+  },
+  {
+    "name": "Astoria (Tower 1)",
+    "latlng": [
+      6.905833,
+      79.853056
+    ]
+  },
+  {
+    "name": "Royal Park",
+    "latlng": [
+      6.90550637392477,
+      79.8881761672293
+    ]
+  },
+  {
+    "name": "Trilium Res.",
+    "latlng": [
+      6.903841,
+      79.87738
+    ]
+  },
+  {
+    "name": "Cathedral of Christ",
+    "latlng": [
+      6.90378042448941,
+      79.8731724175922
+    ]
+  },
+  {
+    "name": "BMICH",
+    "latlng": [
+      6.90180635701663,
+      79.8728703422534
+    ]
+  },
+  {
+    "name": "Platinum One",
+    "latlng": [
+      6.9010456007412,
+      79.8533534819225
+    ]
+  },
+  {
+    "name": "Planetarium",
+    "latlng": [
+      6.90076568850636,
+      79.8628175752746
+    ]
+  },
+  {
+    "name": "Marino Beach",
+    "latlng": [
+      6.90004606,
+      79.8521868
+    ]
+  },
+  {
+    "name": "UoC Library",
+    "latlng": [
+      6.899901,
+      79.861635
+    ]
+  },
+  {
+    "name": "Queens Court",
+    "latlng": [
+      6.89925825147309,
+      79.8562657298701
+    ]
+  },
+  {
+    "name": "Intercontinential",
+    "latlng": [
+      6.89573758905937,
+      79.8550418135379
+    ]
+  },
+  {
+    "name": "Kings Hospital",
+    "latlng": [
+      6.8951659524601,
+      79.8793632190879
+    ]
+  },
+  {
+    "name": "Academy of Design",
+    "latlng": [
+      6.89505671703449,
+      79.857315109869
+    ]
+  },
+  {
+    "name": "Ocean View Tower",
+    "latlng": [
+      6.89279833532025,
+      79.8535747170554
+    ]
+  },
+  {
+    "name": "Labour Dept. ",
+    "latlng": [
+      6.89226996279857,
+      79.8759492462985
+    ]
+  },
+  {
+    "name": "Asokaramaya",
+    "latlng": [
+      6.89108084102836,
+      79.8645739702139
+    ]
+  },
+  {
+    "name": "Lanka Hospitals",
+    "latlng": [
+      6.88972354884289,
+      79.8756233018536
+    ]
+  },
+  {
+    "name": "Maga Engineering",
+    "latlng": [
+      6.88735746998262,
+      79.8838110572588
+    ]
+  },
+  {
+    "name": "Parliament",
+    "latlng": [
+      6.88708564947503,
+      79.9188013619133
+    ]
+  },
+  {
+    "name": "Havelock City (Park Tower)",
+    "latlng": [
+      6.88281284616974,
+      79.8669496472079
     ]
   },
   {
@@ -179,272 +445,6 @@
     "latlng": [
       6.88188555759389,
       79.8648068272731
-    ]
-  },
-  {
-    "name": "Havelock City (Park Tower)",
-    "latlng": [
-      6.88281284616974,
-      79.8669496472079
-    ]
-  },
-  {
-    "name": "Hilton Res.",
-    "latlng": [
-      6.920556,
-      79.856111
-    ]
-  },
-  {
-    "name": "HNB Tower",
-    "latlng": [
-      6.920808,
-      79.862629
-    ]
-  },
-  {
-    "name": "Iconic Galaxy",
-    "latlng": [
-      6.91140684095081,
-      79.9004244747304
-    ]
-  },
-  {
-    "name": "Iconic",
-    "latlng": [
-      6.90753366498618,
-      79.8907071769043
-    ]
-  },
-  {
-    "name": "Intercontinential",
-    "latlng": [
-      6.89573758905937,
-      79.8550418135379
-    ]
-  },
-  {
-    "name": "Jetwing Colombo Seven",
-    "latlng": [
-      6.91659798272639,
-      79.8702065057394
-    ]
-  },
-  {
-    "name": "Kelanitissa Power Station",
-    "latlng": [
-      6.95276005958952,
-      79.8785695442145
-    ]
-  },
-  {
-    "name": "Kings Hospital",
-    "latlng": [
-      6.8951659524601,
-      79.8793632190879
-    ]
-  },
-  {
-    "name": "Labour Dept. ",
-    "latlng": [
-      6.89226996279857,
-      79.8759492462985
-    ]
-  },
-  {
-    "name": "Lanka Hospitals",
-    "latlng": [
-      6.88972354884289,
-      79.8756233018536
-    ]
-  },
-  {
-    "name": "Lotus Tower",
-    "latlng": [
-      6.926944,
-      79.858333
-    ]
-  },
-  {
-    "name": "Maga Engineering",
-    "latlng": [
-      6.88735746998262,
-      79.8838110572588
-    ]
-  },
-  {
-    "name": "Mahaabodi Temple",
-    "latlng": [
-      6.92662314210955,
-      79.8692987033473
-    ]
-  },
-  {
-    "name": "Maligakanda Ressevoir",
-    "latlng": [
-      6.92807237457999,
-      79.871315803886
-    ]
-  },
-  {
-    "name": "Marino Beach",
-    "latlng": [
-      6.90004606,
-      79.8521868
-    ]
-  },
-  {
-    "name": "Movenpick Hotel",
-    "latlng": [
-      6.91173959028482,
-      79.8506932108289
-    ]
-  },
-  {
-    "name": "Nelum Pokuna",
-    "latlng": [
-      6.911153,
-      79.863379
-    ]
-  },
-  {
-    "name": "Ocean View Tower",
-    "latlng": [
-      6.89279833532025,
-      79.8535747170554
-    ]
-  },
-  {
-    "name": "One Galle Face",
-    "latlng": [
-      6.926667,
-      79.845
-    ]
-  },
-  {
-    "name": "Orwell Res.",
-    "latlng": [
-      6.906389,
-      79.8525
-    ]
-  },
-  {
-    "name": "Parkland",
-    "latlng": [
-      6.91750233807105,
-      79.8588508363899
-    ]
-  },
-  {
-    "name": "Parliament",
-    "latlng": [
-      6.88708564947503,
-      79.9188013619133
-    ]
-  },
-  {
-    "name": "Planetarium",
-    "latlng": [
-      6.90076568850636,
-      79.8628175752746
-    ]
-  },
-  {
-    "name": "Platinum One",
-    "latlng": [
-      6.9010456007412,
-      79.8533534819225
-    ]
-  },
-  {
-    "name": "Prime Splendour",
-    "latlng": [
-      6.91946358796701,
-      79.897891541049
-    ]
-  },
-  {
-    "name": "Queens Court",
-    "latlng": [
-      6.89925825147309,
-      79.8562657298701
-    ]
-  },
-  {
-    "name": "Royal Park",
-    "latlng": [
-      6.90550637392477,
-      79.8881761672293
-    ]
-  },
-  {
-    "name": "Sahaspura Flats",
-    "latlng": [
-      6.92506989726066,
-      79.8822679435318
-    ]
-  },
-  {
-    "name": "Sheraton ",
-    "latlng": [
-      6.910256,
-      79.850244
-    ]
-  },
-  {
-    "name": "St. Briget's Convent",
-    "latlng": [
-      6.91060004079349,
-      79.8644314273372
-    ]
-  },
-  {
-    "name": "The Emperor",
-    "latlng": [
-      6.918611,
-      79.847778
-    ]
-  },
-  {
-    "name": "The Grand (Prime)",
-    "latlng": [
-      6.91575191706021,
-      79.8719437970399
-    ]
-  },
-  {
-    "name": "The Monarch",
-    "latlng": [
-      6.917222,
-      79.848333
-    ]
-  },
-  {
-    "name": "Town Hall",
-    "latlng": [
-      6.91565070390756,
-      79.8635093643063
-    ]
-  },
-  {
-    "name": "Trilium Res.",
-    "latlng": [
-      6.903841,
-      79.87738
-    ]
-  },
-  {
-    "name": "UoC Library",
-    "latlng": [
-      6.899901,
-      79.861635
-    ]
-  },
-  {
-    "name": "World Trade Centre (East)",
-    "latlng": [
-      6.932778,
-      79.843611
     ]
   }
 ]

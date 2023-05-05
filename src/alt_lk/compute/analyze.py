@@ -10,6 +10,7 @@ from alt_lk.data.Places import Places
 
 log = Log('matrices')
 WINDOW = 100
+MIN_ALT = 0.3
 
 
 def get_peak_list(idx, pers, m_latlng, m_alt, m_beta):
@@ -78,7 +79,7 @@ def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
             peak is None
             or not is_local_peak(peak_list, i_x)
             or has_nearby_mountain(peak)
-            or peak['alt'] < 0.1
+            or peak['alt'] < MIN_ALT
         ):
             continue
 
