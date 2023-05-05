@@ -4,8 +4,9 @@ import numpy as np
 from scipy.ndimage import minimum_filter
 from utils import Log
 
-from alt_lk.compute._constants import (DIM_X, DIM_Y, MAX_ALPHA, MAX_BETA,
-                                       MAX_DISTANCE, MIN_ALPHA, MIN_BETA)
+from alt_lk.compute._constants import (DIM_X, DIM_Y, LATLNG0, MAX_ALPHA,
+                                       MAX_BETA, MAX_DISTANCE, MIN_ALPHA,
+                                       MIN_BETA)
 from alt_lk.compute.analyze import analyze_peaks
 from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
@@ -112,7 +113,8 @@ def get_label_info_list(m_alpha, m_beta, m_distance, pers):
 def get_color_perspective(distance):
     if distance == MAX_DISTANCE:
         return (0, 128, 255)
-    p_distance = min(MAX_DISTANCE / 2, distance) / MAX_DISTANCE
+    MAX_DISTANCE2 = 100
+    p_distance = min(MAX_DISTANCE2, distance) / MAX_DISTANCE2
 
     hue = 150 * (1 - p_distance)
     saturation = 100
@@ -152,5 +154,4 @@ def perspective_pipeline(latlng0):
 
 
 if __name__ == '__main__':
-    LATLNG0 = (6.9188473380988125, 79.85911404345833)
     perspective_pipeline(LATLNG0)
