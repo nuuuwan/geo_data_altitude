@@ -163,7 +163,7 @@ def get_perspective(latlng0):
                     cur_val = pers[i_y, i_x]
                     if cur_val == 0 or new_val < cur_val:
                         pers[i_y, i_x] = new_val
-    pers = maximum_filter(pers, size=3)
+    pers = maximum_filter(pers, size=5)
     return pers
 
 
