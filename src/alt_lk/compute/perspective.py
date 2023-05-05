@@ -61,7 +61,6 @@ def get_building_labels(m_alpha):
 
         icon = '⬤'
         label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
-        print(d['name'], x, y)
     return label_info_list
 
 
@@ -89,6 +88,8 @@ def get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt):
         for i_lng in range(n_lng):
             alpha = m_alpha[i_lat, i_lng]
             beta = m_beta[i_lat, i_lng]
+            m_distance[i_lat, i_lng]
+
             if not all(
                 [
                     MIN_ALPHA < alpha <= MAX_ALPHA,
@@ -113,7 +114,7 @@ def get_label_info_list(m_alpha, m_beta, m_distance, pers):
 def get_color_perspective(distance):
     if distance == MAX_DISTANCE:
         return (0, 128, 255)
-    MAX_DISTANCE2 = 100
+    MAX_DISTANCE2 = 80
     p_distance = min(MAX_DISTANCE2, distance) / MAX_DISTANCE2
 
     hue = 150 * (1 - p_distance)
@@ -144,7 +145,7 @@ def perspective_pipeline(latlng0):
     log.debug('m_beta computed.')
 
     pers, idx = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
-    pers = minimum_filter(pers, size=1)
+    pers = minimum_filter(pers, size=9)
     analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
     log.info('pers computed.')
 

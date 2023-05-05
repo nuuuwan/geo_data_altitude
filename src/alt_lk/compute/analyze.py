@@ -10,7 +10,7 @@ from alt_lk.data.Places import Places
 
 log = Log('matrices')
 WINDOW = 100
-MIN_ALT = 0.3
+MIN_ALT = 0.5
 
 
 def get_peak_list(idx, pers, m_latlng, m_alt, m_beta):

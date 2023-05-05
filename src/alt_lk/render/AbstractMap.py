@@ -53,7 +53,7 @@ class AbstractMap:
             alt = label_info.get('alt')
 
             if alt is not None:
-                label = f'{alt}m'
+                label = f'{alt:.0f}m'
                 draw.text(
                     (x + FONT_SIZE, y + FONT_SIZE * 1.1),
                     label,
