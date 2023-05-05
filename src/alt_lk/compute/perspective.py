@@ -4,7 +4,7 @@ import time
 import webbrowser
 
 import numpy as np
-from scipy.ndimage import maximum_filter
+from scipy.ndimage import minimum_filter
 from utils import Log
 
 from alt_lk.compute.BUILDING_TO_LATLNG import BUILDING_TO_LATLNG
@@ -39,7 +39,7 @@ def get_perspective(latlng0):
 
     idx = {}
 
-    pers = np.zeros((DIM_Y, DIM_X))
+    pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
             alt = m_alt[i_lat, i_lng]
@@ -61,7 +61,7 @@ def get_perspective(latlng0):
                     if i_y0 == i_y:
                         idx[(i_x0, i_y0)] = (i_lat, i_lng)
 
-    pers = maximum_filter(pers, size=5)
+    pers = minimum_filter(pers, size=5)
 
     peak_list = []
     for i_x in range(DIM_X):
@@ -157,7 +157,7 @@ def get_perspective(latlng0):
 
 
 def get_color_perspective(distance):
-    if distance == 0:
+    if distance == MAX_DISTANCE:
         return (0, 128, 255)
     p_distance = min(MAX_DISTANCE, distance) / MAX_DISTANCE
 
