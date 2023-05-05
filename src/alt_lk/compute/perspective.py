@@ -6,6 +6,7 @@ from utils import Log
 
 from alt_lk.compute._constants import (DIM_X, DIM_Y, MAX_ALPHA, MAX_BETA,
                                        MAX_DISTANCE, MIN_ALPHA, MIN_BETA)
+from alt_lk.compute.analyze import analyze_peaks
 from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
                                      get_latlng_matrix)
@@ -62,33 +63,43 @@ def get_building_labels(m_alpha):
     return label_info_list
 
 
+def color_vertical(idx, pers, i_lat, i_lng, alpha, beta, m_distance):
+    i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
+    i_y0 = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
+    new_val = m_distance[i_lat, i_lng]
+
+    for i_y in range(i_y0, DIM_Y):
+        cur_val = pers[i_y, i_x0]
+        if not (cur_val == 0 or new_val < cur_val):
+            continue
+        pers[i_y, i_x0] = new_val
+        if i_y0 != i_y:
+            continue
+        idx[(i_x0, i_y0)] = (i_lat, i_lng)
+    return pers, idx
+
+
 def get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt):
     n_lat, n_lng = m_alpha.shape
     idx = {}
     pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
-            beta0 = m_beta[i_lat, i_lng]
-            if not (MIN_BETA < beta0 <= MAX_BETA):
-                continue
             alpha = m_alpha[i_lat, i_lng]
-            if not (MIN_ALPHA < alpha <= MAX_ALPHA):
+            beta = m_beta[i_lat, i_lng]
+            if not all(
+                [
+                    MIN_ALPHA < alpha <= MAX_ALPHA,
+                    MIN_BETA < beta <= MAX_BETA,
+                ]
+            ):
                 continue
 
-            i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
-            i_y0 = int(DIM_Y * (MAX_BETA - beta0) / (MAX_BETA - MIN_BETA))
-            new_val = m_distance[i_lat, i_lng]
+            pers, idx = color_vertical(
+                idx, pers, i_lat, i_lng, alpha, beta, m_distance
+            )
 
-            for i_y in range(i_y0, DIM_Y):
-                cur_val = pers[i_y, i_x0]
-                if not (cur_val == 0 or new_val < cur_val):
-                    continue
-                pers[i_y, i_x0] = new_val
-                if i_y0 != i_y:
-                    continue
-                idx[(i_x0, i_y0)] = (i_lat, i_lng)
-
-    return pers
+    return pers, idx
 
 
 def get_label_info_list(m_alpha, m_beta, m_distance, pers):
@@ -129,8 +140,9 @@ def perspective_pipeline(latlng0):
     m_beta = get_beta_matrix(m_alt, m_distance)
     log.debug('m_beta computed.')
 
-    pers = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
+    pers, idx = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
     pers = minimum_filter(pers, size=5)
+    analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
     log.info('pers computed.')
 
     label_info_list = get_label_info_list(m_alpha, m_beta, m_distance, pers)
