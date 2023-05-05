@@ -2,7 +2,7 @@ import json
 import os
 from functools import cached_property
 
-from PIL import Image
+from PIL import Image, ImageDraw, ImageFont
 from utils import Log, hashx
 
 log = Log('basic_map')
@@ -16,9 +16,10 @@ def get_color_default(value):
 
 
 class AbstractMap:
-    def __init__(self, data, get_color=None):
+    def __init__(self, data, get_color=None, label_info_list=None):
         self.data = data
         self.get_color = get_color or get_color_default
+        self.label_info_list = label_info_list or []
 
     @cached_property
     def label(self):
@@ -34,6 +35,8 @@ class AbstractMap:
         data = self.data
         dim_x, dim_y = len(data[0]), len(data)
         img = Image.new('RGB', (dim_x, dim_y))
+
+        # colors
         pixels = img.load()
         for x in range(dim_x):
             for y in range(dim_y):
@@ -41,5 +44,17 @@ class AbstractMap:
                 color = self.get_color(val)
 
                 pixels[x, y] = color
+
+        # labels
+        font = ImageFont.truetype('arial.ttf', 12)
+
+        draw = ImageDraw.Draw(img)
+        for label_info in self.label_info_list:
+            xy = label_info['xy']
+            text = label_info['label']
+            draw.text(xy, text, (0, 0, 0), font=font)
+
         img.save(self.png_path)
         log.info(f'Wrote {self.png_path}')
+
+        os.startfile(os.path.realpath(self.png_path))
