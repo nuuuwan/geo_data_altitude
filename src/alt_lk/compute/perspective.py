@@ -106,31 +106,36 @@ def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
         max_beta = max(
             peak['beta'] if peak else 0 for peak in local_peak_list
         )
-        if peak['beta'] == max_beta:
-            min_d = 100
-            for d in Places.mountains():
-                latlng_mountain = d['latlng']
-                dlat, dlng = (
-                    peak['latlng'][0] - latlng_mountain[0],
-                    peak['latlng'][1] - latlng_mountain[1],
-                )
-                d = math.sqrt(dlat * dlat + dlng * dlng)
-                if d < min_d:
-                    min_d = d
-            if min_d < 0.002:
-                continue
-            alt = peak['alt']
-            print(
-                str(peak['latlng'][0]) + ',' + str(peak['latlng'][1]),
-                '\t',
-                alt * 1_000,
+        if peak['beta'] != max_beta:
+            continue
+
+        min_d = 100
+
+        for d in Places.mountains():
+            latlng_mountain = d['latlng']
+            dlat, dlng = (
+                peak['latlng'][0] - latlng_mountain[0],
+                peak['latlng'][1] - latlng_mountain[1],
             )
-            url = 'https://www.google.lk/maps/place/' + str(peak['latlng'])
-            webbrowser.open(url)
-            time.sleep(0.5)
-            i_display_peaks += 1
-            if i_display_peaks >= 10:
-                break
+            d = math.sqrt(dlat * dlat + dlng * dlng)
+            if d < min_d:
+                min_d = d
+
+        if min_d < 0.002:
+            continue
+
+        alt = peak['alt']
+        print(
+            str(peak['latlng'][0]) + ',' + str(peak['latlng'][1]),
+            '\t',
+            alt * 1_000,
+        )
+        url = 'https://www.google.lk/maps/place/' + str(peak['latlng'])
+        webbrowser.open(url)
+        time.sleep(0.5)
+        i_display_peaks += 1
+        if i_display_peaks >= 10:
+            break
 
 
 def get_perspective(latlng0):
