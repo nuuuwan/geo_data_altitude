@@ -4,7 +4,6 @@ import time
 import webbrowser
 
 import numpy as np
-from scipy.ndimage import minimum_filter
 from utils import Log
 
 from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
@@ -138,23 +137,12 @@ def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
             break
 
 
-def get_perspective(latlng0):
-    m_alpha = get_alpha_matrix(latlng0)
-    m_beta = get_beta_matrix(latlng0)
-    m_distance = get_distance_matrix(latlng0)
-    m_latlng = get_latlng_matrix()
-    m_alt = get_alt_matrix()
-
+def get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt):
     n_lat, n_lng = m_alpha.shape
-
-    print(f'{DIM_X=} x {DIM_Y=} image')
-
     idx = {}
-
     pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
-            m_alt[i_lat, i_lng]
             beta0 = m_beta[i_lat, i_lng]
             if not (MIN_BETA < beta0 <= MAX_BETA):
                 continue
@@ -168,19 +156,20 @@ def get_perspective(latlng0):
 
             for i_y in range(i_y0, DIM_Y):
                 cur_val = pers[i_y, i_x0]
-                if cur_val == 0 or new_val < cur_val:
-                    pers[i_y, i_x0] = new_val
-                    if i_y0 == i_y:
-                        idx[(i_x0, i_y0)] = (i_lat, i_lng)
+                if not (cur_val == 0 or new_val < cur_val):
+                    continue
+                pers[i_y, i_x0] = new_val
+                if i_y0 != i_y:
+                    continue
+                idx[(i_x0, i_y0)] = (i_lat, i_lng)
 
-    pers = minimum_filter(pers, size=5)
-    analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
+    return pers
 
-    label_info_list = get_mountain_labels(
+
+def get_label_info_list(m_alpha, m_beta, m_distance, pers):
+    return get_mountain_labels(
         m_alpha, m_beta, m_distance, pers
     ) + get_building_labels(m_alpha)
-
-    return pers, label_info_list
 
 
 def get_color_perspective(distance):
@@ -202,5 +191,12 @@ def get_color_perspective(distance):
 
 if __name__ == '__main__':
     LATLNG0 = (6.9188473380988125, 79.85911404345833)
-    pers, label_info_list = get_perspective(LATLNG0)
+    m_alpha = get_alpha_matrix(LATLNG0)
+    m_beta = get_beta_matrix(LATLNG0)
+    m_distance = get_distance_matrix(LATLNG0)
+    m_latlng = get_latlng_matrix()
+    m_alt = get_alt_matrix()
+
+    pers = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
+    label_info_list = get_label_info_list(m_alpha, m_beta, m_distance, pers)
     AbstractMap(pers, get_color_perspective, label_info_list).write()
