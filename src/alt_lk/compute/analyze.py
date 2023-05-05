@@ -1,3 +1,4 @@
+import json
 import math
 import time
 import webbrowser
@@ -35,11 +36,13 @@ def get_peak_list(idx, pers, m_latlng, m_alt, m_beta):
 
 def open_peak(peak):
     alt = peak['alt']
-    print(
-        str(peak['latlng'][0]) + ',' + str(peak['latlng'][1]),
-        '\t',
-        alt * 1_000,
+    d = dict(
+        name="Unknown",
+        latlng=peak['latlng'],
+        alt=alt * 1_000,
     )
+    print(json.dumps(d, indent=2) + ',')
+
     url = 'https://www.google.lk/maps/place/' + str(peak['latlng'])
     webbrowser.open(url)
     time.sleep(0.5)
@@ -63,7 +66,7 @@ def is_local_peak(peak_list, i_x):
     peak = peak_list[i_x]
     local_peak_list = peak_list[i_x - WINDOW: i_x + WINDOW]
     max_beta = max(peak['beta'] if peak else 0 for peak in local_peak_list)
-    return peak['beta'] != max_beta
+    return peak['beta'] == max_beta
 
 
 def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
@@ -71,12 +74,10 @@ def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
     i_display_peaks = 0
     for i_x in range(WINDOW, DIM_X - WINDOW):
         peak = peak_list[i_x]
-        if any(
-            [
-                not peak,
-                not is_local_peak(peak_list, i_x),
-                has_nearby_mountain(peak),
-            ]
+        if (
+            peak is None
+            or not is_local_peak(peak_list, i_x)
+            or has_nearby_mountain(peak)
         ):
             continue
 

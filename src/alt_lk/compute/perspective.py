@@ -53,13 +53,14 @@ def get_building_labels(m_alpha):
 
         if not (MIN_ALPHA < alpha <= MAX_ALPHA):
             continue
-        beta = 0.07
+        beta = 0.09
 
         x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
         y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
-        icon = '□'
+        icon = '⬤'
         label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
+        print(d['name'], x, y)
     return label_info_list
 
 
@@ -115,7 +116,7 @@ def get_color_perspective(distance):
 
     hue = 150 * (1 - p_distance)
     saturation = 100
-    light = 10 + 40 * p_distance
+    light = 10 + 30 * p_distance
 
     # hue = 0
     # saturation = 0
@@ -141,7 +142,7 @@ def perspective_pipeline(latlng0):
     log.debug('m_beta computed.')
 
     pers, idx = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
-    pers = minimum_filter(pers, size=5)
+    pers = minimum_filter(pers, size=1)
     analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
     log.info('pers computed.')
 
