@@ -47,17 +47,14 @@ def get_latlng_matrix():
 
 
 def haversine_vectorized(latlng0, latlng_matrix):
-    # Convert latitudes and longitudes to radians
     lat0, lng0 = latlng0
     lat0, lng0 = np.radians(lat0), np.radians(lng0)
 
     latlng_matrix_rad = np.radians(latlng_matrix)
 
-    # Calculate differences in latitude and longitude
     dlat = latlng_matrix_rad[:, :, 0] - lat0
     dlng = latlng_matrix_rad[:, :, 1] - lng0
 
-    # Haversine formula
     a = (
         np.sin(dlat / 2) ** 2
         + np.cos(lat0)
@@ -66,11 +63,7 @@ def haversine_vectorized(latlng0, latlng_matrix):
     )
     c = 2 * np.arcsin(np.sqrt(a))
 
-    # Radius of the Earth in kilometers
-    earth_radius = 6371
-
-    # Calculate the distance
-    distance = earth_radius * c
+    distance = R * c
 
     return distance
 
@@ -85,13 +78,11 @@ def get_distance_matrix(latlng0):
 def get_alpha_matrix(latlng0):
     m_latlng = get_latlng_matrix()
 
-    # Convert latitudes and longitudes to radians
     lat0, lng0 = latlng0
     lat0, lng0 = np.radians(lat0), np.radians(lng0)
 
     latlng_matrix_rad = np.radians(m_latlng)
 
-    # Calculate differences in latitude and longitude
     dlat = latlng_matrix_rad[:, :, 0] - lat0
     dlng = latlng_matrix_rad[:, :, 1] - lng0
     atan = np.arctan2(dlat, dlng)

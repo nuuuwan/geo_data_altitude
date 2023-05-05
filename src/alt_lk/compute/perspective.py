@@ -25,43 +25,54 @@ DIM_Y = 500
 DIM_X = int(DIM_Y * (MAX_ALPHA - MIN_ALPHA) / (MAX_BETA - MIN_BETA) / 2)
 
 
-def get_perspective(latlng0):
-    m_alpha = get_alpha_matrix(latlng0)
-    m_beta = get_beta_matrix(latlng0)
-    m_distance = get_distance_matrix(latlng0)
-    m_latlng = get_latlng_matrix()
-    m_alt = get_alt_matrix()
+def get_mountain_labels(m_alpha, m_beta, m_distance, pers):
+    label_info_list = []
+    for d in Places.mountains():
+        latlng = d['latlng']
+        i_lat, i_lng = _(latlng)
+        alpha, beta, distance = (
+            m_alpha[i_lat, i_lng],
+            m_beta[i_lat, i_lng],
+            m_distance[i_lat, i_lng],
+        )
 
-    n_lat, n_lng = m_alpha.shape
+        if not (MIN_ALPHA < alpha <= MAX_ALPHA):
+            continue
+        if not (MIN_BETA < beta <= MAX_BETA):
+            continue
 
-    print(f'{DIM_X=} x {DIM_Y=} image')
+        x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
+        y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
-    idx = {}
+        min_distance = pers[y, x]
+        icon = '▲'
+        if distance < min_distance + 10:
+            label_info_list.append(
+                dict(xy=(x, y), name=icon + d['name'], alt=d['alt'])
+            )
+    return label_info_list
 
-    pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
-    for i_lat in range(n_lat):
-        for i_lng in range(n_lng):
-            alt = m_alt[i_lat, i_lng]
-            beta0 = m_beta[i_lat, i_lng]
-            if not (MIN_BETA < beta0 <= MAX_BETA):
-                continue
-            alpha = m_alpha[i_lat, i_lng]
-            if not (MIN_ALPHA < alpha <= MAX_ALPHA):
-                continue
 
-            i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
-            i_y0 = int(DIM_Y * (MAX_BETA - beta0) / (MAX_BETA - MIN_BETA))
-            new_val = m_distance[i_lat, i_lng]
+def get_building_labels(m_alpha):
+    label_info_list = []
+    for d in Places.buildings():
+        latlng = d['latlng']
+        i_lat, i_lng = _(latlng)
+        alpha = m_alpha[i_lat, i_lng]
 
-            for i_y in range(i_y0, DIM_Y):
-                cur_val = pers[i_y, i_x0]
-                if cur_val == 0 or new_val < cur_val:
-                    pers[i_y, i_x0] = new_val
-                    if i_y0 == i_y:
-                        idx[(i_x0, i_y0)] = (i_lat, i_lng)
+        if not (MIN_ALPHA < alpha <= MAX_ALPHA):
+            continue
+        beta = 0.07
 
-    pers = minimum_filter(pers, size=5)
+        x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
+        y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
+        icon = '□'
+        label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
+    return label_info_list
+
+
+def get_peak_list(idx, pers, m_latlng, m_alt, m_beta):
     peak_list = []
     for i_x in range(DIM_X):
         dis0 = pers[DIM_Y - 1, i_x]
@@ -80,7 +91,11 @@ def get_perspective(latlng0):
                 )
                 break
         peak_list.append(peak)
+    return peak_list
 
+
+def analyze_peaks(idx, pers, m_latlng, m_alt, m_beta):
+    peak_list = get_peak_list(idx, pers, m_latlng, m_alt, m_beta)
     WINDOW = 100
     i_display_peaks = 0
     for i_x in range(WINDOW, DIM_X - WINDOW):
@@ -117,45 +132,48 @@ def get_perspective(latlng0):
             if i_display_peaks >= 10:
                 break
 
-    label_info_list = []
-    for d in Places.mountains():
-        latlng = d['latlng']
-        i_lat, i_lng = _(latlng)
-        alpha, beta, distance = (
-            m_alpha[i_lat, i_lng],
-            m_beta[i_lat, i_lng],
-            m_distance[i_lat, i_lng],
-        )
 
-        if not (MIN_ALPHA < alpha <= MAX_ALPHA):
-            continue
-        if not (MIN_BETA < beta <= MAX_BETA):
-            continue
+def get_perspective(latlng0):
+    m_alpha = get_alpha_matrix(latlng0)
+    m_beta = get_beta_matrix(latlng0)
+    m_distance = get_distance_matrix(latlng0)
+    m_latlng = get_latlng_matrix()
+    m_alt = get_alt_matrix()
 
-        x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
-        y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
+    n_lat, n_lng = m_alpha.shape
 
-        min_distance = pers[y, x]
-        icon = '▲'
-        if distance < min_distance + 10:
-            label_info_list.append(
-                dict(xy=(x, y), name=icon + d['name'], alt=d['alt'])
-            )
+    print(f'{DIM_X=} x {DIM_Y=} image')
 
-    for d in Places.buildings():
-        latlng = d['latlng']
-        i_lat, i_lng = _(latlng)
-        alpha = m_alpha[i_lat, i_lng]
+    idx = {}
 
-        if not (MIN_ALPHA < alpha <= MAX_ALPHA):
-            continue
-        beta = 0.07
+    pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
+    for i_lat in range(n_lat):
+        for i_lng in range(n_lng):
+            m_alt[i_lat, i_lng]
+            beta0 = m_beta[i_lat, i_lng]
+            if not (MIN_BETA < beta0 <= MAX_BETA):
+                continue
+            alpha = m_alpha[i_lat, i_lng]
+            if not (MIN_ALPHA < alpha <= MAX_ALPHA):
+                continue
 
-        x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
-        y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
+            i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
+            i_y0 = int(DIM_Y * (MAX_BETA - beta0) / (MAX_BETA - MIN_BETA))
+            new_val = m_distance[i_lat, i_lng]
 
-        icon = '□'
-        label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
+            for i_y in range(i_y0, DIM_Y):
+                cur_val = pers[i_y, i_x0]
+                if cur_val == 0 or new_val < cur_val:
+                    pers[i_y, i_x0] = new_val
+                    if i_y0 == i_y:
+                        idx[(i_x0, i_y0)] = (i_lat, i_lng)
+
+    pers = minimum_filter(pers, size=5)
+    analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
+
+    label_info_list = get_mountain_labels(
+        m_alpha, m_beta, m_distance, pers
+    ) + get_building_labels(m_alpha)
 
     return pers, label_info_list
 
