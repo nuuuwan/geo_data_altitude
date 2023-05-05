@@ -46,13 +46,25 @@ class AbstractMap:
                 pixels[x, y] = color
 
         # labels
-        font = ImageFont.truetype('arial.ttf', 10)
+        FONT_SIZE = 12
+        font = ImageFont.truetype('arial.ttf', FONT_SIZE)
 
         draw = ImageDraw.Draw(img)
         for label_info in self.label_info_list:
-            xy = label_info['xy']
-            text = label_info['label']
-            draw.text(xy, text, (0, 0, 0), font=font)
+            x, y = label_info['xy']
+            name = label_info['name']
+            draw.text((x, y), name, (0, 0, 0), font=font)
+
+            alt = label_info.get('alt')
+
+            if alt is not None:
+                label = f'{alt}m'
+                draw.text(
+                    (x + FONT_SIZE, y + FONT_SIZE * 1.5),
+                    label,
+                    (0, 0, 0),
+                    font=font,
+                )
 
         img.save(self.png_path)
         log.info(f'Wrote {self.png_path}')

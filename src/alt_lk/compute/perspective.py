@@ -138,7 +138,9 @@ def get_perspective(latlng0):
         min_distance = pers[y, x]
         icon = '▲'
         if distance < min_distance + 10:
-            label_info_list.append(dict(xy=(x, y), label=icon + d['name']))
+            label_info_list.append(
+                dict(xy=(x, y), name=icon + d['name'], alt=d['alt'])
+            )
 
     for d in Places.buildings():
         latlng = d['latlng']
@@ -153,7 +155,7 @@ def get_perspective(latlng0):
         y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
         icon = '□'
-        label_info_list.append(dict(xy=(x, y), label=icon + d['name']))
+        label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
 
     return pers, label_info_list
 
