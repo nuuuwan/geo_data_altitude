@@ -112,7 +112,7 @@ def get_label_info_list(m_alpha, m_beta, m_distance, pers):
 def get_color_perspective(distance):
     if distance == MAX_DISTANCE:
         return (0, 128, 255)
-    p_distance = min(MAX_DISTANCE, distance) / MAX_DISTANCE
+    p_distance = min(MAX_DISTANCE / 2, distance) / MAX_DISTANCE
 
     hue = 150 * (1 - p_distance)
     saturation = 100
