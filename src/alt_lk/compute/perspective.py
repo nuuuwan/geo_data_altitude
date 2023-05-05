@@ -1,5 +1,6 @@
 import colorsys
 import math
+import time
 import webbrowser
 
 import numpy as np
@@ -41,6 +42,7 @@ def get_perspective(latlng0):
     pers = np.zeros((DIM_Y, DIM_X))
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
+            alt = m_alt[i_lat, i_lng]
             beta0 = m_beta[i_lat, i_lng]
             if not (MIN_BETA < beta0 <= MAX_BETA):
                 continue
@@ -80,7 +82,7 @@ def get_perspective(latlng0):
                 break
         peak_list.append(peak)
 
-    WINDOW = 50
+    WINDOW = 100
     i_display_peaks = 0
     for i_x in range(WINDOW, DIM_X - WINDOW):
         peak = peak_list[i_x]
@@ -100,7 +102,7 @@ def get_perspective(latlng0):
                 d = math.sqrt(dlat * dlat + dlng * dlng)
                 if d < min_d:
                     min_d = d
-            if min_d < 0.01:
+            if min_d < 0.002:
                 continue
             alt = peak['alt']
             print(
@@ -110,6 +112,7 @@ def get_perspective(latlng0):
             )
             url = 'https://www.google.lk/maps/place/' + str(peak['latlng'])
             webbrowser.open(url)
+            time.sleep(0.5)
             i_display_peaks += 1
             if i_display_peaks >= 10:
                 break

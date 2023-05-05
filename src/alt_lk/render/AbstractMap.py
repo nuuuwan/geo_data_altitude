@@ -46,7 +46,7 @@ class AbstractMap:
                 pixels[x, y] = color
 
         # labels
-        font = ImageFont.truetype('arial.ttf', 12)
+        font = ImageFont.truetype('arial.ttf', 10)
 
         draw = ImageDraw.Draw(img)
         for label_info in self.label_info_list:
