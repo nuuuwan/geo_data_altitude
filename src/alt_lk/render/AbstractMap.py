@@ -31,12 +31,7 @@ class AbstractMap:
             'images', f'{self.__class__.__name__}.{self.label}.png'
         )
 
-    def write(self):
-        data = self.data
-        dim_x, dim_y = len(data[0]), len(data)
-        img = Image.new('RGB', (dim_x, dim_y))
-
-        # colors
+    def _write_colors(self, img, data, dim_x, dim_y):
         pixels = img.load()
         for x in range(dim_x):
             for y in range(dim_y):
@@ -45,7 +40,7 @@ class AbstractMap:
 
                 pixels[x, y] = color
 
-        # labels
+    def _write_labels(self, img):
         FONT_SIZE = 15
         font = ImageFont.truetype('arial.ttf', FONT_SIZE)
 
@@ -65,6 +60,14 @@ class AbstractMap:
                     (0, 0, 0),
                     font=font,
                 )
+
+    def write(self):
+        data = self.data
+        dim_x, dim_y = len(data[0]), len(data)
+        img = Image.new('RGB', (dim_x, dim_y))
+
+        self._write_colors(img, data, dim_x, dim_y)
+        self._write_labels(img)
 
         img.save(self.png_path)
         log.info(f'Wrote {self.png_path}')
