@@ -46,7 +46,7 @@ class AbstractMap:
                 pixels[x, y] = color
 
         # labels
-        FONT_SIZE = 12
+        FONT_SIZE = 15
         font = ImageFont.truetype('arial.ttf', FONT_SIZE)
 
         draw = ImageDraw.Draw(img)
@@ -60,7 +60,7 @@ class AbstractMap:
             if alt is not None:
                 label = f'{alt}m'
                 draw.text(
-                    (x + FONT_SIZE, y + FONT_SIZE * 1.5),
+                    (x + FONT_SIZE, y + FONT_SIZE * 1.1),
                     label,
                     (0, 0, 0),
                     font=font,
