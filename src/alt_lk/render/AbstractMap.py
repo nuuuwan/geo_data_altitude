@@ -7,6 +7,7 @@ from utils import Log, hashx
 
 log = Log('basic_map')
 MIN_ALT, MAX_ALT = 0, 2524
+FONT_SIZE = 30
 
 
 def get_color_default(value):
@@ -41,7 +42,6 @@ class AbstractMap:
                 pixels[x, y] = color
 
     def _write_labels(self, img):
-        FONT_SIZE = 15
         font = ImageFont.truetype('arial.ttf', FONT_SIZE)
 
         draw = ImageDraw.Draw(img)

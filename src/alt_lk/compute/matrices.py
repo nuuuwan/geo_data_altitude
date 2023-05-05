@@ -1,5 +1,4 @@
 import math
-from functools import cache
 
 import numpy as np
 from utils import Log
@@ -26,14 +25,11 @@ def _(latlng: tuple[float]) -> tuple[int]:
     return (i_lat, i_lng)
 
 
-@cache
 def get_alt_matrix():
     return np.array(JSONCombinedAltFile().read()) / 1_000
 
 
-@cache
-def get_latlng_matrix():
-    m_alt = get_alt_matrix()
+def get_latlng_matrix(m_alt):
     return np.array(
         [
             [
@@ -68,16 +64,11 @@ def haversine_vectorized(latlng0, latlng_matrix):
     return distance
 
 
-@cache
-def get_distance_matrix(latlng0):
-    m_latlng = get_latlng_matrix()
+def get_distance_matrix(latlng0, m_latlng):
     return haversine_vectorized(latlng0, m_latlng)
 
 
-@cache
-def get_alpha_matrix(latlng0):
-    m_latlng = get_latlng_matrix()
-
+def get_alpha_matrix(latlng0, m_latlng):
     lat0, lng0 = latlng0
     lat0, lng0 = np.radians(lat0), np.radians(lng0)
 
@@ -89,10 +80,7 @@ def get_alpha_matrix(latlng0):
     return 90 - np.degrees(atan)
 
 
-@cache
-def get_beta_matrix(latlng0):
-    m_alt = get_alt_matrix()
-    m_distance = get_distance_matrix(latlng0)
+def get_beta_matrix(m_alt, m_distance):
     D = m_distance - d
     b = D**2 / (2 * R)
 
