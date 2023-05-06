@@ -288,14 +288,6 @@
     "alt": 623.0
   },
   {
-    "name": "Hinguruwaka Kanda",
-    "latlng": [
-      7.370524562864279,
-      80.4029975020816
-    ],
-    "alt": 544
-  },
-  {
     "name": "Dombawela",
     "latlng": [
       7.538717735220649,
@@ -654,14 +646,6 @@
       80.43380516236469
     ],
     "alt": 774.0
-  },
-  {
-    "name": "Bible Rock",
-    "latlng": [
-      7.188,
-      80.434
-    ],
-    "alt": 798
   },
   {
     "name": "Thangappuwa",
@@ -1222,14 +1206,6 @@
       80.783
     ],
     "alt": 2320
-  },
-  {
-    "name": "Marambe Kanda [West Peak]",
-    "latlng": [
-      6.880099916736054,
-      80.19150707743547
-    ],
-    "alt": 328.0
   },
   {
     "name": "Liptons Seat",

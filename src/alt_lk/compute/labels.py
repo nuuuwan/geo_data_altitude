@@ -56,7 +56,17 @@ def get_building_labels(m_alpha):
     return label_info_list
 
 
+def dedupe(info_list):
+    idx = {}
+    for info in sorted(info_list, key=lambda d: d.get('alt', 0)):
+        x = info['xy'][0]
+        x2 = x // 10
+        idx[x2] = info
+    return list(idx.values())
+
+
 def get_label_info_list(m_alpha, m_beta, m_distance, pers):
-    return get_mountain_labels(
-        m_alpha, m_beta, m_distance, pers
-    ) + get_building_labels(m_alpha)
+    return dedupe(
+        get_mountain_labels(m_alpha, m_beta, m_distance, pers)
+        + get_building_labels(m_alpha)
+    )

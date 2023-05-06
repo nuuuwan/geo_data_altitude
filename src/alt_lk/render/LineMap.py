@@ -34,7 +34,7 @@ class LineMap:
         distance = line_info['distance']
         color = self.get_color(distance)
 
-        width = 20
+        width = 10
         x_left = x - width / 2
         y_top = y1
         height = y2 - y1
