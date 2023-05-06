@@ -3,7 +3,7 @@ from svglib.svglib import svg2rlg
 from utils import Log
 
 log = Log('ImageConvert')
-DPI = 300
+DPI = 100
 
 
 class ImageConvert:

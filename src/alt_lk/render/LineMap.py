@@ -48,7 +48,6 @@ class LineMap:
                 width=width,
                 height=height,
                 fill=color,
-                fill_opacity=0.8,
             ),
         )
 
