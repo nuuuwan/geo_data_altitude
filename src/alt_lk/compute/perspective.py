@@ -10,6 +10,7 @@ from alt_lk.compute.matrices import (get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
                                      get_latlng_matrix)
 from alt_lk.render.LineMap import LineMap
+from alt_lk.render.PathMap import PathMap
 
 log = Log('perspective')
 
@@ -95,6 +96,22 @@ def get_color_perspective(distance):
     return hex_color
 
 
+def cluster_line_info_list(line_info_list):
+    def distance_to_group(distance):
+        return distance // 5
+
+    group_to_line = {}
+    for info in line_info_list:
+        distance = info['distance']
+        group = distance_to_group(distance)
+        if group not in group_to_line:
+            group_to_line[group] = []
+        x, y = info['x'], info['y1']
+        group_to_line[group].append((x, y))
+
+    return group_to_line
+
+
 def perspective_pipeline(latlng0):
     m_alt = get_alt_matrix()
     m_latlng = get_latlng_matrix(m_alt)
@@ -108,6 +125,10 @@ def perspective_pipeline(latlng0):
     label_info_list = get_label_info_list(
         m_alpha, m_beta, m_distance, line_info_pers_idx
     )
+
+    group_to_line = cluster_line_info_list(line_info_list)
+
+    PathMap(group_to_line, get_color_perspective).write()
     LineMap(line_info_list, get_color_perspective, label_info_list).write()
 
 
