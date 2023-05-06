@@ -86,6 +86,8 @@ class LineMap:
         return list(map(self.render_label, self.label_info_list))
 
     def write(self):
+        n = len(self.line_info_list)
+        log.debug(f'Writing LineMap ({n:,} lines)')
         svg = _(
             'svg',
             [self.render_sky()] + self.render_lines() + self.render_labels(),

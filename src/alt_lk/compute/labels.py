@@ -51,7 +51,7 @@ def get_building_labels(m_alpha):
         x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
         y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
 
-        icon = '⬤'
+        icon = '●'
         label_info_list.append(dict(xy=(x, y), name=icon + d['name']))
     return label_info_list
 
