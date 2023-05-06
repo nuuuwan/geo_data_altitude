@@ -3,6 +3,7 @@ from svglib.svglib import svg2rlg
 from utils import Log
 
 log = Log('ImageConvert')
+DPI = 300
 
 
 class ImageConvert:
@@ -13,6 +14,6 @@ class ImageConvert:
         assert self.path.endswith('.svg')
         drawing = svg2rlg(self.path)
         png_path = self.path[:-3] + 'png'
-        renderPM.drawToFile(drawing, png_path, fmt="PNG", dpi=600)
+        renderPM.drawToFile(drawing, png_path, fmt="PNG", dpi=DPI)
         log.info(f'Saved {png_path}')
         return png_path
