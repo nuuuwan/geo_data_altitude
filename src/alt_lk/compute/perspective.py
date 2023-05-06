@@ -4,10 +4,10 @@ import numpy as np
 from scipy.ndimage import minimum_filter
 from utils import Log
 
+from alt_lk._utils_future.FiledNPArray import FiledNPArray
 from alt_lk.compute._constants import (DIM_X, DIM_Y, LATLNG0, MAX_ALPHA,
                                        MAX_BETA, MAX_DISTANCE, MIN_ALPHA,
                                        MIN_BETA)
-from alt_lk.compute.analyze import analyze_peaks
 from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
                                      get_latlng_matrix)
@@ -64,7 +64,7 @@ def get_building_labels(m_alpha):
     return label_info_list
 
 
-def color_vertical(idx, pers, i_lat, i_lng, alpha, beta, m_distance):
+def color_vertical(pers, i_lat, i_lng, alpha, beta, m_distance):
     i_x0 = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
     i_y0 = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
     new_val = m_distance[i_lat, i_lng]
@@ -76,13 +76,11 @@ def color_vertical(idx, pers, i_lat, i_lng, alpha, beta, m_distance):
         pers[i_y, i_x0] = new_val
         if i_y0 != i_y:
             continue
-        idx[(i_x0, i_y0)] = (i_lat, i_lng)
-    return pers, idx
+    return pers
 
 
-def get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt):
+def get_perspective_nocache(m_alpha, m_beta, m_distance):
     n_lat, n_lng = m_alpha.shape
-    idx = {}
     pers = np.ones((DIM_Y, DIM_X)) * MAX_DISTANCE
     for i_lat in range(n_lat):
         for i_lng in range(n_lng):
@@ -98,11 +96,19 @@ def get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt):
             ):
                 continue
 
-            pers, idx = color_vertical(
-                idx, pers, i_lat, i_lng, alpha, beta, m_distance
-            )
+            pers = color_vertical(pers, i_lat, i_lng, alpha, beta, m_distance)
 
-    return pers, idx
+    return pers
+
+
+def get_perspective(latlng0, m_alpha, m_beta, m_distance):
+    def func_get():
+        pers = get_perspective_nocache(m_alpha, m_beta, m_distance)
+        pers = minimum_filter(pers, size=9)
+        return pers
+
+    lat0, lng0 = latlng0
+    return FiledNPArray(f'perspective-{lat0:.4f}-{lng0:.4f}', func_get).value
 
 
 def get_label_info_list(m_alpha, m_beta, m_distance, pers):
@@ -131,24 +137,12 @@ def get_color_perspective(distance):
 
 def perspective_pipeline(latlng0):
     m_alt = get_alt_matrix()
-    log.debug('m_alt computed.')
     m_latlng = get_latlng_matrix(m_alt)
-    log.debug('m_latlng computed.')
-
     m_alpha = get_alpha_matrix(latlng0, m_latlng)
-    log.debug('m_alpha computed.')
-
     m_distance = get_distance_matrix(latlng0, m_latlng)
-    log.debug('m_distance computed.')
+    m_beta = get_beta_matrix(latlng0, m_alt, m_distance)
 
-    m_beta = get_beta_matrix(m_alt, m_distance)
-    log.debug('m_beta computed.')
-
-    pers, idx = get_perspective(m_alpha, m_beta, m_distance, m_latlng, m_alt)
-    pers = minimum_filter(pers, size=9)
-    analyze_peaks(idx, pers, m_latlng, m_alt, m_beta)
-    log.info('pers computed.')
-
+    pers = get_perspective(latlng0, m_alpha, m_beta, m_distance)
     label_info_list = get_label_info_list(m_alpha, m_beta, m_distance, pers)
 
     AbstractMap(pers, get_color_perspective, label_info_list).write()
