@@ -6,7 +6,7 @@ from utils import Log, hashx
 from utils.xmlx import _
 
 from alt_lk._utils_future.ImageConvert import ImageConvert
-from alt_lk.compute._constants import DIM_X, DIM_Y
+from alt_lk.compute._constants import DIM_X, DIM_Y, MAX_ALT
 
 log = Log('LineMap')
 
@@ -33,7 +33,7 @@ class LineMap:
         y2 = line_info['y2']
         distance = line_info['distance']
         color = self.get_color(distance)
-  
+
         width = 20
         x_left = x - width / 2
         y_top = y1
@@ -52,13 +52,16 @@ class LineMap:
         )
 
     def render_label(self, label_info):
+        DEFAULT_FONT_SIZE = 15
         x, y = label_info['xy']
         name = label_info['name']
         label = name
         alt = label_info.get('alt')
         if alt:
             label += f' ({alt:.0f}m)'
-
+            font_size = DEFAULT_FONT_SIZE * alt * 2 / MAX_ALT
+        else:
+            font_size = DEFAULT_FONT_SIZE
         text_angle = -90
         transform = ' '.join(
             [
@@ -75,7 +78,7 @@ class LineMap:
                 x=x,
                 y=y,
                 fill='black',
-                font_size=30,
+                font_size=font_size,
                 font_family='Tahoma',
                 text_anchor='start',
                 transform=transform,

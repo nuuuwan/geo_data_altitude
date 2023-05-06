@@ -4,9 +4,11 @@ from utils import Log
 
 log = Log('_constants')
 
+MAX_ALT = 2524
+
 DIM = 1201
 DIM2 = DIM * 5
-MAX_DISTANCE = 150
+MAX_DISTANCE = 100
 
 MID_ALPHA = 90
 ALPHA_SPAN = 45
@@ -20,9 +22,6 @@ log.debug(f'{DIM_X=} x {DIM_Y=}')
 
 LATLNG0 = (6.9188473380988125, 79.85911404345833)
 
-DIM = 1201
-DIM2 = DIM * 5
-MAX_DISTANCE = 100
 h0 = 0.15
 R = 6371
 d = math.sqrt(2 * R * h0)
