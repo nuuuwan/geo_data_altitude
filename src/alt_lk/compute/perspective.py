@@ -2,13 +2,24 @@ import colorsys
 
 from utils import FiledVariable, Log
 
-from alt_lk.compute._constants import (DIM_X, DIM_Y, LATLNG0, MAX_ALPHA,
-                                       MAX_BETA, MAX_DISTANCE, MIN_ALPHA,
-                                       MIN_BETA)
+from alt_lk.compute._constants import (
+    DIM_X,
+    DIM_Y,
+    LATLNG0,
+    MAX_ALPHA,
+    MAX_BETA,
+    MAX_DISTANCE,
+    MIN_ALPHA,
+    MIN_BETA,
+)
 from alt_lk.compute.labels import get_label_info_list
-from alt_lk.compute.matrices import (get_alpha_matrix, get_alt_matrix,
-                                     get_beta_matrix, get_distance_matrix,
-                                     get_latlng_matrix)
+from alt_lk.compute.matrices import (
+    get_alpha_matrix,
+    get_alt_matrix,
+    get_beta_matrix,
+    get_distance_matrix,
+    get_latlng_matrix,
+)
 from alt_lk.render.LineMap import LineMap
 
 log = Log('perspective')
@@ -78,14 +89,12 @@ def get_line_info_list(latlng0, m_alpha, m_beta, m_distance):
 def get_color_perspective(distance):
     if distance == MAX_DISTANCE:
         return (0, 128, 255)
-    MAX_DISTANCE2 = 80
+    MAX_DISTANCE2 = 120
     p_distance = min(MAX_DISTANCE2, distance) / MAX_DISTANCE2
 
     hue = 120 * (1 - p_distance)
     saturation = 100
     light = 10 + 40 * p_distance
-
-    hue, saturation, light = 0, 100, 50
 
     (r, g, b) = colorsys.hls_to_rgb(hue / 360, light / 100, saturation / 100)
     hex_color = f'#{int(r * 255):02X}{int(g * 255):02X}{int(b * 255):02X}'
