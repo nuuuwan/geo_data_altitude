@@ -5,6 +5,7 @@ import numpy as np
 from utils import Log
 
 log = Log('FiledNPArray')
+DIR_DATA_TMP = 'data_tmp'
 
 
 class FiledNPArray:
@@ -14,7 +15,9 @@ class FiledNPArray:
 
     @property
     def path(self):
-        return os.path.join('data_tmp', f'{self.key}.npy')
+        if not os.path.exists(DIR_DATA_TMP):
+            os.mkdir(DIR_DATA_TMP)
+        return os.path.join(DIR_DATA_TMP, f'{self.key}.npy')
 
     @cached_property
     def value(self):
