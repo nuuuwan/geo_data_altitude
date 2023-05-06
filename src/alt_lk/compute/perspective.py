@@ -2,7 +2,7 @@ import colorsys
 
 import numpy as np
 from scipy.ndimage import minimum_filter
-from utils import Log
+from utils import FiledVariable, Log
 
 from alt_lk._utils_future.FiledNPArray import FiledNPArray
 from alt_lk.compute._constants import (DIM_X, DIM_Y, LATLNG0, MAX_ALPHA,
@@ -12,7 +12,7 @@ from alt_lk.compute.matrices import (_, get_alpha_matrix, get_alt_matrix,
                                      get_beta_matrix, get_distance_matrix,
                                      get_latlng_matrix)
 from alt_lk.data.Places import Places
-from alt_lk.render.AbstractMap import AbstractMap
+from alt_lk.render.LineMap import LineMap
 
 log = Log('matrices')
 
@@ -111,6 +111,60 @@ def get_perspective(latlng0, m_alpha, m_beta, m_distance):
     return FiledNPArray(f'perspective-{lat0:.4f}-{lng0:.4f}', func_get).value
 
 
+def get_line_info_idx(m_alpha, m_beta, m_distance):
+    n_lat, n_lng = m_alpha.shape
+    idx = {}
+    for i_lat in range(n_lat):
+        for i_lng in range(n_lng):
+            alpha = m_alpha[i_lat, i_lng]
+            beta = m_beta[i_lat, i_lng]
+            if not all(
+                [
+                    MIN_ALPHA < alpha <= MAX_ALPHA,
+                    MIN_BETA < beta <= MAX_BETA,
+                ]
+            ):
+                continue
+
+            x = int(DIM_X * (alpha - MIN_ALPHA) / (MAX_ALPHA - MIN_ALPHA))
+            y = int(DIM_Y * (MAX_BETA - beta) / (MAX_BETA - MIN_BETA))
+            distance = m_distance[i_lat, i_lng]
+
+            if x not in idx:
+                idx[x] = []
+            idx[x].append(dict(x=x, y=y, distance=distance))
+    return idx
+
+
+def get_line_info_list_nocache(idx):
+    line_info_list = []
+    for x, info_list in idx.items():
+        sorted_info_list = sorted(info_list, key=lambda d: d['distance'])
+        y2 = DIM_Y
+        for info in sorted_info_list:
+            y1 = info['y']
+            if y1 < y2:
+                line_info = dict(
+                    x=info['x'],
+                    y1=y1,
+                    y2=y2,
+                    distance=info['distance'],
+                )
+                line_info_list.append(line_info)
+                y2 = y1
+
+    return line_info_list
+
+
+def get_line_info_list(latlng0, m_alpha, m_beta, m_distance):
+    def func_get():
+        idx = get_line_info_idx(m_alpha, m_beta, m_distance)
+        return get_line_info_list_nocache(idx)
+
+    lat0, lng0 = latlng0
+    return FiledVariable(f'perspective-{lat0:.4f}-{lng0:.4f}', func_get).value
+
+
 def get_label_info_list(m_alpha, m_beta, m_distance, pers):
     return get_mountain_labels(
         m_alpha, m_beta, m_distance, pers
@@ -132,7 +186,9 @@ def get_color_perspective(distance):
     # light = 30 + 40 * p_distance
 
     (r, g, b) = colorsys.hls_to_rgb(hue / 360, light / 100, saturation / 100)
-    return tuple(int(255 * x) for x in (r, g, b))
+    # return tuple(int(255 * x) for x in (r, g, b))
+    hex_color = f'#{int(r * 255):02X}{int(g * 255):02X}{int(b * 255):02X}'
+    return hex_color
 
 
 def perspective_pipeline(latlng0):
@@ -145,7 +201,10 @@ def perspective_pipeline(latlng0):
     pers = get_perspective(latlng0, m_alpha, m_beta, m_distance)
     label_info_list = get_label_info_list(m_alpha, m_beta, m_distance, pers)
 
-    AbstractMap(pers, get_color_perspective, label_info_list).write()
+    line_info_list = get_line_info_list_nocache(
+        latlng0, m_alpha, m_beta, m_distance
+    )
+    LineMap(line_info_list, get_color_perspective, label_info_list).write()
 
 
 if __name__ == '__main__':
