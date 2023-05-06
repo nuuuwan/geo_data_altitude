@@ -11,7 +11,7 @@ from alt_lk.compute.matrices import (get_alpha_matrix, get_alt_matrix,
                                      get_latlng_matrix)
 from alt_lk.render.LineMap import LineMap
 
-log = Log('matrices')
+log = Log('perspective')
 
 
 def get_line_info_idx(m_alpha, m_beta, m_distance):
