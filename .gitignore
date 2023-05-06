@@ -1,6 +1,6 @@
 # custom 
 data/json/combined.json
-data_tmp/*
+data_tmp
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
