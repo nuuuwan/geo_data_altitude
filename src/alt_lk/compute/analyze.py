@@ -42,7 +42,7 @@ def open_peak(peak):
         latlng=peak['latlng'],
         alt=alt * 1_000,
     )
-    print(json.dumps(d, indent=2) + ',')
+    log.debug(json.dumps(d, indent=2) + ',')
 
     url = 'https://www.google.lk/maps/place/' + str(peak['latlng'])
     webbrowser.open(url)

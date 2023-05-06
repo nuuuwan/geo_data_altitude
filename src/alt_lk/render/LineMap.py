@@ -76,7 +76,7 @@ class LineMap:
         return _(
             'rect',
             None,
-            dict(x=0, y=0, width=DIM_X, height=DIM_Y, fill='#87ceeb'),
+            dict(x=0, y=0, width=DIM_X, height=DIM_Y, fill='#1b7ced'),
         )
 
     def render_lines(self):
