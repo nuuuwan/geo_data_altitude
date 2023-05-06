@@ -1,8 +1,8 @@
 import numpy as np
 from utils import Log
 
-from alt_lk._utils_future.FiledNPArray import FiledNPArray
 from alt_lk.compute._constants import DIM, DIM2, R, d
+from alt_lk._utils_future.FiledNPArray import FiledNPArray
 from alt_lk.data.JSONCombinedAltFile import JSONCombinedAltFile
 
 log = Log('matrices')
