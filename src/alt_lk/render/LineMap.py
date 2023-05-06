@@ -59,7 +59,7 @@ class LineMap:
         alt = label_info.get('alt')
         if alt:
             label += f' ({alt:.0f}m)'
-            font_size = DEFAULT_FONT_SIZE * alt * 2 / MAX_ALT
+            font_size = DEFAULT_FONT_SIZE * max(1, alt * 2 / MAX_ALT)
         else:
             font_size = DEFAULT_FONT_SIZE
         text_angle = -90
