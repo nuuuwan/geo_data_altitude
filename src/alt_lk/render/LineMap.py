@@ -79,7 +79,16 @@ class LineMap:
         )
 
     def render_lines(self):
-        return list(map(self.render_line, self.line_info_list))
+        return list(
+            map(
+                self.render_line,
+                sorted(
+                    self.line_info_list,
+                    key=lambda d: d['distance'],
+                    reverse=True,
+                ),
+            )
+        )
 
     def render_labels(self):
         return list(map(self.render_label, self.label_info_list))
