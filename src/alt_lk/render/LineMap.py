@@ -33,7 +33,7 @@ class LineMap:
         y2 = line_info['y2']
         distance = line_info['distance']
         color = self.get_color(distance)
-
+  
         width = 20
         x_left = x - width / 2
         y_top = y1
@@ -58,6 +58,16 @@ class LineMap:
         alt = label_info.get('alt')
         if alt:
             label += f' ({alt:.0f}m)'
+
+        text_angle = -90
+        transform = ' '.join(
+            [
+                f'translate({x},{y})',
+                f'rotate({text_angle})',
+                f'translate({-x},{-y})',
+            ]
+        )
+
         return _(
             'text',
             label,
@@ -65,9 +75,10 @@ class LineMap:
                 x=x,
                 y=y,
                 fill='black',
-                font_size=12,
+                font_size=30,
                 font_family='Tahoma',
                 text_anchor='start',
+                transform=transform,
             ),
         )
 
