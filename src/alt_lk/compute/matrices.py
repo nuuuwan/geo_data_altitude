@@ -1,21 +1,10 @@
-import math
-
 import numpy as np
 from utils import Log
 
+from alt_lk.compute._constants import DIM, DIM2, R, d
 from alt_lk.data.JSONCombinedAltFile import JSONCombinedAltFile
 
 log = Log('matrices')
-
-DIM = 1201
-DIM2 = DIM * 5
-MAX_DISTANCE = 100
-
-
-h0 = 0.15
-R = 6371
-d = math.sqrt(2 * R * h0)
-print(f'{R=}km, {h0=}km, {d=}km')
 
 
 def _(latlng: tuple[float]) -> tuple[int]:
