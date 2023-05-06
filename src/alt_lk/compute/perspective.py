@@ -2,24 +2,13 @@ import colorsys
 
 from utils import FiledVariable, Log
 
-from alt_lk.compute._constants import (
-    DIM_X,
-    DIM_Y,
-    LATLNG0,
-    MAX_ALPHA,
-    MAX_BETA,
-    MAX_DISTANCE,
-    MIN_ALPHA,
-    MIN_BETA,
-)
+from alt_lk.compute._constants import (DIM_X, DIM_Y, LATLNG0, MAX_ALPHA,
+                                       MAX_BETA, MAX_DISTANCE, MIN_ALPHA,
+                                       MIN_BETA)
 from alt_lk.compute.labels import get_label_info_list
-from alt_lk.compute.matrices import (
-    get_alpha_matrix,
-    get_alt_matrix,
-    get_beta_matrix,
-    get_distance_matrix,
-    get_latlng_matrix,
-)
+from alt_lk.compute.matrices import (get_alpha_matrix, get_alt_matrix,
+                                     get_beta_matrix, get_distance_matrix,
+                                     get_latlng_matrix)
 from alt_lk.render.LineMap import LineMap
 
 log = Log('perspective')
