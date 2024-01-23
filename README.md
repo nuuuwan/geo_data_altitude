@@ -14,12 +14,12 @@ A **Digital Elevation Model (DEM)** is a 3D representation of a terrain's surfac
 
 Thus, an area one latitude by one longitude, is represented by a grid of 1201 by 1201 cells.
 
-## Examples 
+## Examples
 
-### [example1-map.py](examples/example1-map.py)
+### [example1_map.py](examples/example1_map.py)
 
-![example1-map.py](examples/example1-map.py.png)
+![example1_map.py](examples/example1_map.py.png)
 
-### [example2-slope-map.py](examples/example2-slope-map.py)
+### [example2_slope_map.py](examples/example2_slope_map.py)
 
-![example2-slope-map.py](examples/example2-slope-map.py.png)
+![example2_slope_map.py](examples/example2_slope_map.py.png) 
