@@ -2,23 +2,23 @@ import os
 from functools import cache
 
 import numpy as np
-from utils import JSONFile, Log
+from utils import Log
 
 from alt_lk.core.BBox import BBox
 from alt_lk.core.LatLng import LatLng
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
-from utils_future import File
+from utils_future import SparseArrayFile
 
 log = Log('AltFile')
 
 
-class AltFile(JSONFile, File):
-    DIR_JSON_ALT = os.path.join('data', 'json')
+class AltFile(SparseArrayFile):
+    DIR_ALT = os.path.join('data', 'alt')
 
     @staticmethod
     def get_path_from_latlng(latlng: LatLng):
-        return os.path.join(AltFile.DIR_JSON_ALT,
-                            f'alt.{latlng.str_03d}.json')
+        return os.path.join(AltFile.DIR_ALT,
+                            f'alt.{latlng.str_03d}.npz')
 
     @staticmethod
     def from_latlng(latlng: LatLng):
@@ -31,10 +31,8 @@ class AltFile(JSONFile, File):
     @staticmethod
     def from_geotiff(geotiff: GeoTIFFFile):
         data = geotiff.data
-        log.debug(f'Read {geotiff.path}.')
         json_alt_file = AltFile.from_latlng(geotiff.latlng)
         json_alt_file.write(data)
-        log.info(f'Wrote {json_alt_file}.')
         return json_alt_file
 
     @staticmethod
@@ -63,7 +61,6 @@ class AltFile(JSONFile, File):
                 json_alt_file = AltFile.from_latlng(LatLng(lat, lng))
                 if os.path.exists(json_alt_file.path):
                     matrix = np.array(json_alt_file.read())
-                    log.debug(f'Read {json_alt_file}')
                 else:
                     matrix = AltFile.get_empty_data()
                     log.warning(f'No AltFile for {lat},{lng}')

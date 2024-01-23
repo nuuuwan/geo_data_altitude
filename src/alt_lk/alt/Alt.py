@@ -1,10 +1,16 @@
+import os
 from dataclasses import dataclass
 from functools import cache
+
+from utils import Log
 
 from alt_lk.core.BBox import BBox
 from alt_lk.core.LatLng import LatLng
 from alt_lk.data.AltFile import AltFile
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
+from utils_future import SparseArrayFile
+
+log = Log('Alt')
 
 
 @dataclass
@@ -28,10 +34,20 @@ class Alt:
     LAT_SPAN = MAX_LAT - MIN_LAT
     MIN_LNG = MIN_LATLNG.lng
 
+    COMBINED_DATA_FILE_PATH = os.path.join('data', 'alt.combined.lk.npz')
+    COMBINED_DATA_FILE = SparseArrayFile(COMBINED_DATA_FILE_PATH)
+
     @staticmethod
     @cache
     def get_combined_data_for_lk():
-        return AltFile.get_combined_data(Alt.BBOX)
+        # filed
+        if Alt.COMBINED_DATA_FILE.exists:
+            return Alt.COMBINED_DATA_FILE.read()
+
+        # not filed
+        data = AltFile.get_combined_data(Alt.BBOX)
+        Alt.COMBINED_DATA_FILE.write(data)
+        return data
 
     @staticmethod
     @cache

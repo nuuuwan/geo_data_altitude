@@ -12,7 +12,7 @@ log = Log('GeoTIFFFile')
 
 class GeoTIFFFile(File):
     DIM = 1201
-    DIR_GEOTIFF = os.path.join('data', 'tif')
+    DIR_ALT_TIF = os.path.join('data', 'geo-tiff')
 
     @cached_property
     def latlng(self) -> LatLng:
@@ -25,7 +25,7 @@ class GeoTIFFFile(File):
     def get_path_from_latlng(latlng: LatLng):
         lat, lng = LatLng.tuple
         # TODO: add "alt"
-        return os.path.join(GeoTIFFFile.DIR_GEOTIFF,
+        return os.path.join(GeoTIFFFile.DIR_ALT_TIF,
                             f'n{lat:02d}_e{lng:03d}_3arc_v2.tif')
 
     @staticmethod
