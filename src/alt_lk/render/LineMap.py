@@ -120,5 +120,5 @@ class LineMap:
         svg = self.render()
         svg.store(self.svg_path)
         log.info(f'Wrote {self.svg_path}')
-        png_path = ImageConvert(self.svg_path).to_png()
+        png_path = ImageConvert(self.svg_path).svg_to_png()
         os.startfile(os.path.realpath(png_path))
