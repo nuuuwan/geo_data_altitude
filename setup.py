@@ -3,7 +3,7 @@
 import setuptools
 
 DIST_NAME = 'alt_lk'
-VERSION = "1.0.2"
+VERSION = "1.0.3"
 DESCRIPTION = "Altitude information for Sri Lanka"
 INSTALL_REQUIRES = [
     'matplotlib',
