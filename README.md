@@ -16,9 +16,11 @@ Thus, an area one latitude by one longitude, is represented by a grid of 1201 by
 
 ## Examples 
 
-### Altitude visualization of Sri Lanka 
-
 [examples/example1-map.py](examples/example1-map.py)
 
-![example1-map](examples/example1-map.png)
+![example1-map.py](example1-map.py.png)
+
+[examples/example2-slope-map.py](examples/example2-slope-map.py)
+
+![example2-slope-map.py](example2-slope-map.py.png)
 
