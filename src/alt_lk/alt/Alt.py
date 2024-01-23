@@ -39,7 +39,7 @@ class Alt:
 
     @staticmethod
     @cache
-    def get_combined_data_for_lk():
+    def get_alt_data_for_lk():
         # filed
         if Alt.COMBINED_DATA_FILE.exists:
             return Alt.COMBINED_DATA_FILE.read()
@@ -63,6 +63,6 @@ class Alt:
     @staticmethod
     @cache
     def from_latlng(latlng: LatLng) -> float:
-        data = Alt.get_combined_data_for_lk()
+        data = Alt.get_alt_data_for_lk()
         (i_lat, i_lng) = Alt.latlng_to_indices(latlng)
         return Alt(data[i_lat][i_lng])
