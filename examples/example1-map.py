@@ -1,11 +1,10 @@
-import os
 
 import matplotlib.pyplot as plt
 import numpy as np
-from utils import Log
-from utils_future import Example
 
 from alt_lk import Alt
+from utils_future import Example
+
 
 def main():
     data = Alt.get_alt_data_for_lk()
