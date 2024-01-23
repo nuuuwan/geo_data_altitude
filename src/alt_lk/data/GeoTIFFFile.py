@@ -2,7 +2,10 @@ import os
 from functools import cached_property
 
 import rasterio
-from utils import File, Log
+from utils import Log
+
+from alt_lk.core.LatLng import LatLng
+from utils_future import File
 
 log = Log('GeoTIFFFile')
 
@@ -12,32 +15,21 @@ class GeoTIFFFile(File):
     DIR_GEOTIFF = os.path.join('data', 'tif')
 
     @cached_property
-    def latlng(self) -> tuple[float, float]:
+    def latlng(self) -> LatLng:
         file_name = os.path.basename(self.path)
         lat = int(file_name[1:3])
         lng = int(file_name[5:8])
-        return (lat, lng)
-
-    def __str__(self) -> str:
-        return f'{self.path} ({self.size_m:.2f}MB)'
-
-    @cached_property
-    def size(self) -> int:
-        return os.path.getsize(self.path)
-
-    @cached_property
-    def size_m(self) -> float:
-        return self.size / 1024 / 1024
+        return LatLng(lat, lng)
 
     @staticmethod
-    def get_path_from_latlng(latlng: tuple[int, int]):
-        lat, lng = latlng
+    def get_path_from_latlng(latlng: LatLng):
+        lat, lng = LatLng.tuple
         # TODO: add "alt"
         return os.path.join(GeoTIFFFile.DIR_GEOTIFF,
                             f'n{lat:02d}_e{lng:03d}_3arc_v2.tif')
 
     @staticmethod
-    def from_latlng(latlng: tuple[int, int]):
+    def from_latlng(latlng: LatLng):
         return GeoTIFFFile(GeoTIFFFile.get_path_from_latlng(latlng))
 
     @cached_property

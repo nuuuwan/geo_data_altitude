@@ -1,45 +1,27 @@
 import os
-from functools import cache, cached_property
+from functools import cache
 
 import numpy as np
 from utils import JSONFile, Log
 
+from alt_lk.core.BBox import BBox
+from alt_lk.core.LatLng import LatLng
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
+from utils_future import File
 
 log = Log('JSONAltFile')
 
 
-class JSONAltFile(JSONFile):
+class JSONAltFile(JSONFile, File):
     DIR_JSON_ALT = os.path.join('data', 'json')
-    MIN_LAT = 5
-    MAX_LAT = 9
-    MIN_LNG = 78
-    MAX_LNG = 82
-    LAT_SPAN = MAX_LAT - MIN_LAT
-    LNG_SPAN = MAX_LNG - MIN_LNG
-
-    def __init__(self, path):
-        self.path = path
-
-    def __str__(self) -> str:
-        return f'{self.path} ({self.size_m:.2f}MB)'
-
-    @cached_property
-    def size(self) -> int:
-        return os.path.getsize(self.path)
-
-    @cached_property
-    def size_m(self) -> float:
-        return self.size / 1024 / 1024
 
     @staticmethod
-    def get_path_from_latlng(latlng: tuple[int, int]):
-        lat, lng = latlng
+    def get_path_from_latlng(latlng: LatLng):
         return os.path.join(JSONAltFile.DIR_JSON_ALT,
-                            f'alt.{lat:03d}N.{lng:03d}E.json')
+                            f'alt.{latlng.str_03d}.json')
 
     @staticmethod
-    def from_latlng(latlng: tuple[int, int]):
+    def from_latlng(latlng: LatLng):
         return JSONAltFile(JSONAltFile.get_path_from_latlng(latlng))
 
     @staticmethod
@@ -69,12 +51,16 @@ class JSONAltFile(JSONFile):
 
     @staticmethod
     @cache
-    def get_combined_data(min_lat, max_lat, min_lng, max_lng):
+    def get_combined_data(bbox: BBox):
+        min_latlng, max_latlng = bbox.tuple
+        min_lat, min_lng = min_latlng.tuple
+        max_lat, max_lng = max_latlng.tuple
+
         matrix_block = []
         for lat in range(max_lat, min_lat - 1, -1):
             matrix_row = []
             for lng in range(min_lng, max_lng + 1):
-                json_alt_file = JSONAltFile.from_latlng((lat, lng))
+                json_alt_file = JSONAltFile.from_latlng(LatLng(lat, lng))
                 if os.path.exists(json_alt_file.path):
                     matrix = np.array(json_alt_file.read())
                     log.debug(f'Read {json_alt_file}')
@@ -91,15 +77,7 @@ class JSONAltFile(JSONFile):
         data = matrix_block.tolist()
         dim_x = len(data)
         dim_y = len(data[0])
-        log.debug(f'dim_x={dim_x:,}, dim_y={dim_y:,}')
-        return data
+        assert dim_x == GeoTIFFFile.DIM * (max_lat - min_lat + 1)
+        assert dim_y == GeoTIFFFile.DIM * (max_lng - min_lng + 1)
 
-    @staticmethod
-    @cache
-    def get_combined_data_for_lk():
-        return JSONAltFile.get_combined_data(
-            JSONAltFile.MIN_LAT,
-            JSONAltFile.MAX_LAT,
-            JSONAltFile.MIN_LNG,
-            JSONAltFile.MAX_LNG
-        )
+        return data
