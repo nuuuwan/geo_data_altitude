@@ -16,10 +16,14 @@ Thus, an area one latitude by one longitude, is represented by a grid of 1201 by
 
 ## Examples
 
-### [example1_map.py](examples/example1_map.py)
+### [example1_alt_map.py](examples/example1_alt_map.py)
 
-![example1_map.py](examples/example1_map.py.png)
+![example1_alt_map.py](examples/example1_alt_map.py.png)
 
 ### [example2_slope_map.py](examples/example2_slope_map.py)
 
-![example2_slope_map.py](examples/example2_slope_map.py.png) 
+![example2_slope_map.py](examples/example2_slope_map.py.png)
+
+### [example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py)
+
+![example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py.png)

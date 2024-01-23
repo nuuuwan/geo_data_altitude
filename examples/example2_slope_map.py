@@ -1,4 +1,3 @@
-
 import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage import convolve
@@ -18,15 +17,15 @@ def main():
 
     padded_arr = np.pad(arr, pad_width=WIDTH)
     neighborhood_avg = convolve(
-        padded_arr, kernel, 
+        padded_arr,
+        kernel,
     )
     neighborhood_avg = neighborhood_avg[WIDTH:-WIDTH, WIDTH:-WIDTH]
-    slope = arr - neighborhood_avg 
-    
+    slope = arr - neighborhood_avg
+
     LIMIT = 20
     slope[slope > LIMIT] = LIMIT
     slope[slope < -LIMIT] = -LIMIT
-
 
     plt.imshow(slope, cmap='bwr')
     plt.colorbar()

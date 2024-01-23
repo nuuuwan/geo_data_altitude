@@ -8,7 +8,7 @@ log = Log('examples')
 
 class Example:
     DPI = 1_200
-    
+
     @staticmethod
     def write(py_file_name: str):
         base_name = os.path.basename(py_file_name)
