@@ -1,6 +1,5 @@
 # custom 
-data/json/combined.json
-data_tmp
+*local-only* 
 
 # Byte-compiled / optimized / DLL files
 __pycache__/

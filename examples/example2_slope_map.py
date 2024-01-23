@@ -23,7 +23,7 @@ def main():
     neighborhood_avg = neighborhood_avg[WIDTH:-WIDTH, WIDTH:-WIDTH]
     slope = arr - neighborhood_avg
 
-    LIMIT = 20
+    LIMIT = 10
     slope[slope > LIMIT] = LIMIT
     slope[slope < -LIMIT] = -LIMIT
 

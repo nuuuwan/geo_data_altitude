@@ -7,8 +7,8 @@ from utils import WWW, Log
 
 from alt_lk.core.BBox import BBox
 from alt_lk.core.LatLng import LatLng
+from alt_lk.core.Resolution import Resolution
 from alt_lk.data.AltFile import AltFile
-from alt_lk.data.GeoTIFFFile import GeoTIFFFile
 from utils_future import SparseArrayFile
 
 log = Log('Alt')
@@ -35,7 +35,9 @@ class Alt:
     LAT_SPAN = MAX_LAT - MIN_LAT
     MIN_LNG = MIN_LATLNG.lng
 
-    COMBINED_FILE_NAME = 'alt.combined.lk.npz'
+    RESOLUTION = Resolution(1, 3)
+
+    COMBINED_FILE_NAME = f'alt.combined.lk.{RESOLUTION.file_code}.npz'
     COMBINED_DATA_FILE_PATH = os.path.join('data', COMBINED_FILE_NAME)
     COMBINED_DATA_FILE = SparseArrayFile(COMBINED_DATA_FILE_PATH)
 
@@ -69,18 +71,17 @@ class Alt:
 
     @staticmethod
     def build_matrix():
-        data = AltFile.get_combined_data(Alt.BBOX)
+        data = AltFile.get_combined_data(Alt.BBOX, Alt.RESOLUTION)
         Alt.COMBINED_DATA_FILE.write(data)
         return data
 
     @staticmethod
     @cache
     def latlng_to_indices(latlng: LatLng):
+        dim1 = Alt.RESOLUTION.dim1
         lat, lng = latlng.tuple
-        i_lat = (Alt.LAT_SPAN + 1) * GeoTIFFFile.DIM - int(
-            (lat - Alt.MIN_LAT) * GeoTIFFFile.DIM
-        )
-        i_lng = int((lng - Alt.MIN_LNG) * GeoTIFFFile.DIM)
+        i_lat = (Alt.LAT_SPAN + 1) * dim1 - int((lat - Alt.MIN_LAT) * dim1)
+        i_lng = int((lng - Alt.MIN_LNG) * dim1)
 
         return (i_lat, i_lng)
 
