@@ -27,3 +27,5 @@ Thus, an area one latitude by one longitude, is represented by a grid of 1201 by
 ### [example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py)
 
 ![example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py.png)
+
+*Updated 2024-01-23*
