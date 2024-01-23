@@ -60,18 +60,26 @@ print(str(alt))
 
 ![example1_alt_map.py](examples/example1_alt_map.py.png)
 
+[examples]  Wrote examples\example2_slope_map.py.png.
+
 ### [example2_slope_map.py](examples/example2_slope_map.py)
 
 ![example2_slope_map.py](examples/example2_slope_map.py.png)
+
+[examples]  Wrote examples\example3_alt_map_recolored.py.png.
 
 ### [example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py)
 
 ![example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py.png)
 
-### [example4_alt_map_recolored_colombo.py](examples/example4_alt_map_recolored_colombo.py)
+### [example4_alt_map_colombo.py](examples/example4_alt_map_colombo.py)
 
-![example4_alt_map_recolored_colombo.py](examples/example4_alt_map_recolored_colombo.py.png)
+![example4_alt_map_colombo.py](examples/example4_alt_map_colombo.py.png)
 
-### [example5_alt_map_recolored_viharamahadevi_park.py](examples/example5_alt_map_recolored_viharamahadevi_park.py)
+### [example5_alt_map_viharamahadevi_park.py](examples/example5_alt_map_viharamahadevi_park.py)
 
-![example5_alt_map_recolored_viharamahadevi_park.py](examples/example5_alt_map_recolored_viharamahadevi_park.py.png)
+![example5_alt_map_viharamahadevi_park.py](examples/example5_alt_map_viharamahadevi_park.py.png)
+
+### [example6_alt_map_nuwara_eliya.py](examples/example6_alt_map_nuwara_eliya.py)
+
+![example6_alt_map_nuwara_eliya.py](examples/example6_alt_map_nuwara_eliya.py.png)
