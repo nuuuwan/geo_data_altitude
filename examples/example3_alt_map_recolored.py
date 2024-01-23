@@ -20,7 +20,7 @@ def main():
         if max_alt > MAX_MAX_ALT:
             break
         i += 1
-        
+
     plt.imshow(arr, cmap='Spectral')
     Example.write(__file__)
 

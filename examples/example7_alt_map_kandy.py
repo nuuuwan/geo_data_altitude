@@ -7,8 +7,8 @@ from utils_future import Example
 
 def main():
     bbox = BBox(
-        LatLng(6.91966959592014, 80.75296449863315),
-        LatLng(6.988336872509167, 80.82439013020513),
+        LatLng(7.263741575093108, 80.58389833079025),
+        LatLng(7.332285244984741, 80.67434703330403),
     )
     data = Alt.get_matrix_subset(bbox)
     arr = np.array(data)

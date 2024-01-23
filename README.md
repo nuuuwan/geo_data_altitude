@@ -83,3 +83,7 @@ print(str(alt))
 ### [example6_alt_map_nuwara_eliya.py](examples/example6_alt_map_nuwara_eliya.py)
 
 ![example6_alt_map_nuwara_eliya.py](examples/example6_alt_map_nuwara_eliya.py.png)
+
+### [example7_alt_map_kandy.py](examples/example7_alt_map_kandy.py)
+
+![example7_alt_map_kandy.py](examples/example7_alt_map_kandy.py.png)
