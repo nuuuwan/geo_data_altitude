@@ -1,8 +1,10 @@
 # Altitude information for Sri Lanka
 
-## Versions 
+## Versions
 
-* 1.0.1 - Base version
+### 1.0.2 (Current Version)
+
+* Base Version
 
 ## Data
 
