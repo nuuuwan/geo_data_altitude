@@ -61,3 +61,7 @@ print(str(alt))
 ### [example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py)
 
 ![example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py.png)
+
+### [example4_alt_map_recolored_colombo.py](examples/example4_alt_map_recolored_colombo.py)
+
+![example4_alt_map_recolored_colombo.py](examples/example4_alt_map_recolored_colombo.py.png)

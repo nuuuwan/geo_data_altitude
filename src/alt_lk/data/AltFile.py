@@ -68,9 +68,6 @@ class AltFile(SparseArrayFile):
         min_latlng, max_latlng = bbox.tuple
         min_lat, min_lng = min_latlng.tuple
         max_lat, max_lng = max_latlng.tuple
-
-        dim1 = resolution.dim1
-
         matrix_block = []
         for lat in range(max_lat, min_lat - 1, -1):
             matrix_row = []
@@ -84,9 +81,6 @@ class AltFile(SparseArrayFile):
                     matrix = AltFile.get_empty_data(resolution)
                     log.warning(
                         f'No AltFile for {LatLng(lat, lng)} / {resolution}')
-                dim_x = len(matrix)
-                dim_y = len(matrix[0])
-                assert dim_x == dim_y == dim1
 
                 matrix_row.append(matrix)
             matrix_block.append(matrix_row)
@@ -94,7 +88,7 @@ class AltFile(SparseArrayFile):
         data = matrix_block.tolist()
         dim_x = len(data)
         dim_y = len(data[0])
-
+        dim1 = resolution.dim1
         assert dim_x == dim1 * (max_lat - min_lat + 1)
         assert dim_y == dim1 * (max_lng - min_lng + 1)
 

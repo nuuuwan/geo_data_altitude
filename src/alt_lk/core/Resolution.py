@@ -11,7 +11,10 @@ class Resolution:
         return hash((self.arc_seconds, self.version))
 
     def __str__(self):
-        return f'Resolution(arc_seconds={self.arc_seconds}, version={self.version})'
+        return (
+            f'Resolution(arc_seconds={self.arc_seconds},'
+            + f' version={self.version})'
+        )
 
     @cached_property
     def dim(self) -> int:
