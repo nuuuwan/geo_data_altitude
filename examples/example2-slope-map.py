@@ -21,7 +21,7 @@ def main():
         padded_arr, kernel, 
     )
     neighborhood_avg = neighborhood_avg[WIDTH:-WIDTH, WIDTH:-WIDTH]
-    slope = neighborhood_avg - arr 
+    slope = arr - neighborhood_avg 
     
     LIMIT = 10
     slope[slope > LIMIT] = LIMIT

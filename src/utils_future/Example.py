@@ -11,7 +11,7 @@ class Example:
     def write(py_file_name: str):
         base_name = os.path.basename(py_file_name)
         image_path = os.path.join('examples', f'{base_name}.png')
-        plt.savefig(image_path)
+        plt.savefig(image_path, dpi=900)
         log.info(f'Wrote {image_path}.')
         os.startfile(image_path)
         plt.close()
