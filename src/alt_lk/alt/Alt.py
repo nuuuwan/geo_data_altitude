@@ -52,7 +52,7 @@ class Alt:
 
     @staticmethod
     @cache
-    def get_alt_data_for_lk():
+    def matrix():
         if Alt.LOCAL_COMBINED_DATA_FILE.exists:
             return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
@@ -68,7 +68,7 @@ class Alt:
         return data
 
     @staticmethod
-    def build_combined_data_file():
+    def build_matrix():
         data = AltFile.get_combined_data(Alt.BBOX)
         Alt.COMBINED_DATA_FILE.write(data)
         return data
@@ -87,6 +87,6 @@ class Alt:
     @staticmethod
     @cache
     def from_latlng(latlng: LatLng) -> float:
-        data = Alt.get_alt_data_for_lk()
+        data = Alt.matrix()
         (i_lat, i_lng) = Alt.latlng_to_indices(latlng)
         return Alt(data[i_lat][i_lng])

@@ -6,7 +6,7 @@ from utils_future import Example
 
 
 def main():
-    data = Alt.get_alt_data_for_lk()
+    data = Alt.matrix()
     arr = np.array(data)
 
     arr[arr <= 0] = -100
