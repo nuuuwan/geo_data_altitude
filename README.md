@@ -1,5 +1,12 @@
 # Altitude information for Sri Lanka
 
+
+### Install 
+
+```bash
+pip install alt_lk-nuuuwan
+```
+
 ## Data
 
 This library uses **1 arc-second Digital Elevation Models (DEMs)** from the [United States Geological Survey](https://earthexplorer.usgs.gov/).
