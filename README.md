@@ -2,7 +2,7 @@
 
 ## Versions 
 
-* 1.0.0 - Base version
+* 1.0.1 - Base version
 
 ## Data
 
