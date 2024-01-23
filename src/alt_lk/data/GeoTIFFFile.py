@@ -11,7 +11,7 @@ class GeoTIFFFile(File):
     DIM = 1201
     DIR_GEOTIFF = os.path.join('data', 'tif')
 
-    @cached_property 
+    @cached_property
     def latlng(self) -> tuple[float, float]:
         file_name = os.path.basename(self.path)
         lat = int(file_name[1:3])
@@ -33,7 +33,8 @@ class GeoTIFFFile(File):
     def get_path_from_latlng(latlng: tuple[int, int]):
         lat, lng = latlng
         # TODO: add "alt"
-        return os.path.join(GeoTIFFFile.DIR_GEOTIFF, f'n{lat:02d}_e{lng:03d}_3arc_v2.tif')
+        return os.path.join(GeoTIFFFile.DIR_GEOTIFF,
+                            f'n{lat:02d}_e{lng:03d}_3arc_v2.tif')
 
     @staticmethod
     def from_latlng(latlng: tuple[int, int]):

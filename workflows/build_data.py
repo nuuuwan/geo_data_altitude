@@ -1,6 +1,5 @@
-from alt_lk.data.JSONAltFile import JSONAltFile
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
-
+from alt_lk.data.JSONAltFile import JSONAltFile
 
 if __name__ == '__main__':
     JSONAltFile.list_from_dir_geotiff(GeoTIFFFile.DIR_GEOTIFF)
