@@ -1,8 +1,9 @@
 import os
+import tempfile
 from dataclasses import dataclass
 from functools import cache
 
-from utils import Log
+from utils import WWW, Log
 
 from alt_lk.core.BBox import BBox
 from alt_lk.core.LatLng import LatLng
@@ -34,17 +35,40 @@ class Alt:
     LAT_SPAN = MAX_LAT - MIN_LAT
     MIN_LNG = MIN_LATLNG.lng
 
-    COMBINED_DATA_FILE_PATH = os.path.join('data', 'alt.combined.lk.npz')
+    COMBINED_FILE_NAME = 'alt.combined.lk.npz'
+    COMBINED_DATA_FILE_PATH = os.path.join('data', COMBINED_FILE_NAME)
     COMBINED_DATA_FILE = SparseArrayFile(COMBINED_DATA_FILE_PATH)
+
+    LOCAL_COMBINED_DATA_FILE_PATH = os.path.join(
+        tempfile.gettempdir(), COMBINED_FILE_NAME
+    )
+    LOCAL_COMBINED_DATA_FILE = SparseArrayFile(LOCAL_COMBINED_DATA_FILE_PATH)
+
+    URL_COMBILED_DATA = (
+        'https://raw.githubusercontent.com'
+        + '/nuuuwan/alt_lk'
+        + f'/main/data/{COMBINED_FILE_NAME}'
+    )
 
     @staticmethod
     @cache
     def get_alt_data_for_lk():
-        # filed
-        if Alt.COMBINED_DATA_FILE.exists:
-            return Alt.COMBINED_DATA_FILE.read()
+        if Alt.LOCAL_COMBINED_DATA_FILE.exists:
+            return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
-        # not filed
+        if Alt.COMBINED_DATA_FILE.exists:
+            data = Alt.COMBINED_DATA_FILE.read()
+            Alt.LOCAL_COMBINED_DATA_FILE.write(data)
+            return data
+
+        WWW.download_binary(
+            Alt.URL_COMBILED_DATA, Alt.LOCAL_COMBINED_DATA_FILE_PATH
+        )
+        data = Alt.LOCAL_COMBINED_DATA_FILE.read()
+        return data
+
+    @staticmethod
+    def build_combined_data_file():
         data = AltFile.get_combined_data(Alt.BBOX)
         Alt.COMBINED_DATA_FILE.write(data)
         return data

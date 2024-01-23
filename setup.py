@@ -3,7 +3,7 @@
 import setuptools
 
 DIST_NAME = 'alt_lk'
-VERSION = "1.0.3"
+VERSION = "1.0.4"
 DESCRIPTION = "Altitude information for Sri Lanka"
 INSTALL_REQUIRES = [
     'matplotlib',
@@ -29,9 +29,8 @@ setuptools.setup(
         "License :: OSI Approved :: MIT License",
         "Operating System :: OS Independent",
     ],
-    package_dir={"": "src", "data": "data"},
-    packages=setuptools.find_packages(where="src")
-    + setuptools.find_packages(where="data"),
+    package_dir={"": "src"},
+    packages=setuptools.find_packages(where="src"),
     python_requires=">=3.10",
     install_requires=INSTALL_REQUIRES,
     test_suite='nose.collector',
