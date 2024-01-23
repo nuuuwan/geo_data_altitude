@@ -13,3 +13,9 @@ A **Digital Elevation Model (DEM)** is a 3D representation of a terrain's surfac
 **3 arc-second** refers to the spatial resolution of the DEM. One arc-second is 1/3600th of a degree of latitude or longitude. Therefore, three arc-seconds means each pixel or grid cell in the DEM represents a square of the Earth's surface that is three arc-seconds by three arc-seconds in size. This roughly translates to about 90 meters by 90 meters at the equator, although the actual ground distance covered by three arc-seconds varies slightly with latitude due to the Earth's curvature.
 
 Thus, an area one latitude by one longitude, is represented by a grid of 1201 by 1201 cells.
+
+## Examples 
+
+### Altitude visualization of Sri Lanka 
+
+![example1-map](examples/example1-map.png)
