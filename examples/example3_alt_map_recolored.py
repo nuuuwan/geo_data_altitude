@@ -9,8 +9,6 @@ def main():
     data = Alt.matrix()
     arr = np.array(data)
 
- 
-
     plt.imshow(arr, cmap='Spectral')
     Example.write(__file__)
 

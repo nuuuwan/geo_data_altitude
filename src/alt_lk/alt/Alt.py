@@ -2,6 +2,7 @@ import os
 import tempfile
 from dataclasses import dataclass
 from functools import cache
+
 import numpy as np
 from utils import WWW, Log
 
@@ -76,9 +77,6 @@ class Alt:
         data = AltFile.get_combined_data(Alt.BBOX, Alt.RESOLUTION)
         Alt.COMBINED_DATA_FILE.write(data)
         return data
-    
-
-        
 
     @staticmethod
     @cache
@@ -102,6 +100,7 @@ class Alt:
         arr = np.array(data)
         arr_subset = arr[i_max_lat:i_min_lat, i_min_lng:i_max_lng]
         return arr_subset.tolist()
+
     @staticmethod
     @cache
     def from_latlng(latlng: LatLng) -> float:
