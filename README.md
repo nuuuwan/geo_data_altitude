@@ -6,7 +6,7 @@
 pip install alt_lk-nuuuwan
 ```
 
-[alt_lk-nuuuwan on pypi.org](https://pypi.org/project/alt-lk-nuuuwan/)
+**Project** on [pypi.org](https://pypi.org/project/alt-lk-nuuuwan/)
 
 ## Data
 
