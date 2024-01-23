@@ -7,7 +7,7 @@ log = Log('examples')
 
 
 class Example:
-    DPI = 300
+    DPI = 1_200
 
     @staticmethod
     def write(py_file_name: str):

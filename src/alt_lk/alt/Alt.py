@@ -2,7 +2,7 @@ import os
 import tempfile
 from dataclasses import dataclass
 from functools import cache
-
+import numpy as np
 from utils import WWW, Log
 
 from alt_lk.core.BBox import BBox
@@ -55,7 +55,7 @@ class Alt:
     @staticmethod
     @cache
     def matrix():
-        log.warning('Loading matrix...[⚠️slow]')
+        log.warning('[⚠️slow] Loading matrix...')
         if Alt.LOCAL_COMBINED_DATA_FILE.exists:
             return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
@@ -76,6 +76,9 @@ class Alt:
         data = AltFile.get_combined_data(Alt.BBOX, Alt.RESOLUTION)
         Alt.COMBINED_DATA_FILE.write(data)
         return data
+    
+
+        
 
     @staticmethod
     @cache
@@ -87,6 +90,18 @@ class Alt:
 
         return (i_lat, i_lng)
 
+    @staticmethod
+    @cache
+    def get_matrix_subset(bbox: BBox) -> list[list[float]]:
+        data = Alt.matrix()
+        min_latlng, max_latlng = bbox.tuple
+        min_lat, min_lng = min_latlng.tuple
+        max_lat, max_lng = max_latlng.tuple
+        i_min_lat, i_min_lng = Alt.latlng_to_indices(min_latlng)
+        i_max_lat, i_max_lng = Alt.latlng_to_indices(max_latlng)
+        arr = np.array(data)
+        arr_subset = arr[i_max_lat:i_min_lat, i_min_lng:i_max_lng]
+        return arr_subset.tolist()
     @staticmethod
     @cache
     def from_latlng(latlng: LatLng) -> float:
