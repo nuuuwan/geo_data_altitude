@@ -1,7 +1,6 @@
 # Altitude information for Sri Lanka
 
-
-### Install 
+## Install
 
 ```bash
 pip install alt_lk-nuuuwan
