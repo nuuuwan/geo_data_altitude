@@ -26,4 +26,4 @@ class Resolution:
 
     @cached_property
     def file_code(self) -> str:
-        return f'{self.arc_seconds}arc_{self.version}v'
+        return f'{self.arc_seconds}arc_v{self.version}'

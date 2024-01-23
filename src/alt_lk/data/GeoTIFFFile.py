@@ -13,6 +13,8 @@ log = Log('GeoTIFFFile')
 
 class GeoTIFFFile(File):
     DIR_GEO_TIF = os.path.join('data', 'geo-tiff-local-only')
+    DIR_GEO_TIF_ARC3 = os.path.join(DIR_GEO_TIF, '3arc_v2')
+    DIR_GEO_TIF_ARC1 = os.path.join(DIR_GEO_TIF, '1arc_v3')
 
     @cached_property
     def latlng(self) -> LatLng:
