@@ -8,6 +8,9 @@ from utils_future import Example
 def main():
     data = Alt.get_alt_data_for_lk()
     arr = np.array(data)
+
+    arr[arr <= 0] = -100
+
     plt.imshow(arr, cmap='coolwarm')
     plt.colorbar()
     Example.write(__file__)
