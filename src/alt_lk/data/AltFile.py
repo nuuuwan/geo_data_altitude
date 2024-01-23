@@ -32,6 +32,10 @@ class AltFile(SparseArrayFile):
     def from_geotiff(geotiff: GeoTIFFFile):
         data = geotiff.data
         json_alt_file = AltFile.from_latlng(geotiff.latlng)
+        if not os.path.exists(AltFile.DIR_ALT):
+            os.makedirs(AltFile.DIR_ALT)
+            log.info(f'Created {AltFile.DIR_ALT}.')
+
         json_alt_file.write(data)
         return json_alt_file
 
