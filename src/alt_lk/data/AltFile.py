@@ -9,20 +9,20 @@ from alt_lk.core.LatLng import LatLng
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
 from utils_future import File
 
-log = Log('JSONAltFile')
+log = Log('AltFile')
 
 
-class JSONAltFile(JSONFile, File):
+class AltFile(JSONFile, File):
     DIR_JSON_ALT = os.path.join('data', 'json')
 
     @staticmethod
     def get_path_from_latlng(latlng: LatLng):
-        return os.path.join(JSONAltFile.DIR_JSON_ALT,
+        return os.path.join(AltFile.DIR_JSON_ALT,
                             f'alt.{latlng.str_03d}.json')
 
     @staticmethod
     def from_latlng(latlng: LatLng):
-        return JSONAltFile(JSONAltFile.get_path_from_latlng(latlng))
+        return AltFile(AltFile.get_path_from_latlng(latlng))
 
     @staticmethod
     def get_empty_data() -> list[list[float]]:
@@ -32,7 +32,7 @@ class JSONAltFile(JSONFile, File):
     def from_geotiff(geotiff: GeoTIFFFile):
         data = geotiff.data
         log.debug(f'Read {geotiff.path}.')
-        json_alt_file = JSONAltFile.from_latlng(geotiff.latlng)
+        json_alt_file = AltFile.from_latlng(geotiff.latlng)
         json_alt_file.write(data)
         log.info(f'Wrote {json_alt_file}.')
         return json_alt_file
@@ -45,7 +45,7 @@ class JSONAltFile(JSONFile, File):
                 continue
             path = os.path.join(dir_geotiff, file_name)
             geotiff = GeoTIFFFile(path)
-            json_alt_file = JSONAltFile.from_geotiff(geotiff)
+            json_alt_file = AltFile.from_geotiff(geotiff)
             json_alt_file_list.append(json_alt_file)
         return json_alt_file_list
 
@@ -60,13 +60,13 @@ class JSONAltFile(JSONFile, File):
         for lat in range(max_lat, min_lat - 1, -1):
             matrix_row = []
             for lng in range(min_lng, max_lng + 1):
-                json_alt_file = JSONAltFile.from_latlng(LatLng(lat, lng))
+                json_alt_file = AltFile.from_latlng(LatLng(lat, lng))
                 if os.path.exists(json_alt_file.path):
                     matrix = np.array(json_alt_file.read())
                     log.debug(f'Read {json_alt_file}')
                 else:
-                    matrix = JSONAltFile.get_empty_data()
-                    log.warning(f'No JSONAltFile for {lat},{lng}')
+                    matrix = AltFile.get_empty_data()
+                    log.warning(f'No AltFile for {lat},{lng}')
                 dim_x = len(matrix)
                 dim_y = len(matrix[0])
                 assert dim_x == dim_y == GeoTIFFFile.DIM

@@ -3,8 +3,8 @@ from functools import cache
 
 from alt_lk.core.BBox import BBox
 from alt_lk.core.LatLng import LatLng
+from alt_lk.data.AltFile import AltFile
 from alt_lk.data.GeoTIFFFile import GeoTIFFFile
-from alt_lk.data.JSONAltFile import JSONAltFile
 
 
 @dataclass
@@ -31,7 +31,7 @@ class Alt:
     @staticmethod
     @cache
     def get_combined_data_for_lk():
-        return JSONAltFile.get_combined_data(Alt.BBOX)
+        return AltFile.get_combined_data(Alt.BBOX)
 
     @staticmethod
     @cache
