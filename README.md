@@ -87,3 +87,7 @@ print(str(alt))
 ### [example7_alt_map_kandy.py](examples/example7_alt_map_kandy.py)
 
 ![example7_alt_map_kandy.py](examples/example7_alt_map_kandy.py.png)
+
+### [example8_alt_map_horton_plains.py](examples/example8_alt_map_horton_plains.py)
+
+![example8_alt_map_horton_plains.py](examples/example8_alt_map_horton_plains.py.png)
