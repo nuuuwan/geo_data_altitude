@@ -1,5 +1,9 @@
 # Altitude information for Sri Lanka
 
+## Versions 
+
+* 1.0.0 - Base version
+
 ## Data
 
 This library uses **3 arc-second Digital Elevation Models (DEMs)** from the [United States Geological Survey](https://www.usgs.gov/programs/national-geospatial-program/topographic-maps).
