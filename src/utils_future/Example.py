@@ -14,7 +14,7 @@ class Example:
         plt.close()
 
         print(f'''
-[examples/{base_name}](examples/{base_name})
+### [{base_name}](examples/{base_name})
 
-![{base_name}]({base_name}.png)
+![{base_name}](examples/{base_name}.png)
         ''')
