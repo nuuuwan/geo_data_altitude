@@ -26,6 +26,22 @@ This refers to the spatial resolution of the DEM. One arc-second is 1/3600th of 
 
 ## Examples
 
+```python
+from alt_lk import Alt, LatLng
+
+latlng_sri_paada = LatLng(6.809498226498262, 80.49925188865949)
+alt = Alt.from_latlng(latlng_sri_paada)
+
+print(alt)
+>> 2,193m / 7,195ft
+print(alt.alt_m)
+>> 2193.0
+print(alt.alt_ft)
+>> 7194.88212
+print(str(alt))
+>> 2,193m / 7,195ft
+```
+
 ### [example1_alt_map.py](examples/example1_alt_map.py)
 
 ![example1_alt_map.py](examples/example1_alt_map.py.png)

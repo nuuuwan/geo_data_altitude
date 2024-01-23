@@ -55,6 +55,7 @@ class Alt:
     @staticmethod
     @cache
     def matrix():
+        log.warning('Loading matrix...[⚠️slow]')
         if Alt.LOCAL_COMBINED_DATA_FILE.exists:
             return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
@@ -63,6 +64,7 @@ class Alt:
             Alt.LOCAL_COMBINED_DATA_FILE.write(data)
             return data
 
+        log.info(f'Downloading data from {Alt.URL_COMBILED_DATA} ...')
         WWW.download_binary(
             Alt.URL_COMBILED_DATA, Alt.LOCAL_COMBINED_DATA_FILE_PATH
         )
