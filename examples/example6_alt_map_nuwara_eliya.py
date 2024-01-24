@@ -13,7 +13,6 @@ def main():
     )
     data = Alt.get_matrix_subset(bbox)
     arr = np.array(data)
-    # arr = np.power(arr, 2.5)
 
     colors = ["darkgreen", "green", "yellow", "orange", "red", "brown"]
     cmap = mcolors.LinearSegmentedColormap.from_list('custom', colors)
