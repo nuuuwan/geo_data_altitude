@@ -93,8 +93,6 @@ class Alt:
     def get_matrix_subset(bbox: BBox) -> list[list[float]]:
         data = Alt.matrix()
         min_latlng, max_latlng = bbox.tuple
-        min_lat, min_lng = min_latlng.tuple
-        max_lat, max_lng = max_latlng.tuple
         i_min_lat, i_min_lng = Alt.latlng_to_indices(min_latlng)
         i_max_lat, i_max_lng = Alt.latlng_to_indices(max_latlng)
         arr = np.array(data)
