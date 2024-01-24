@@ -54,6 +54,25 @@ print(alt.alt_ft)
 print(str(alt))
 >> 2,193m / 7,195ft
 
+latlng_piduruthalagala = LatLng(lat=7.001665, lng=80.772689)
+latlng_kirigalpotta = LatLng(lat=6.813, lng=80.783)
+latlng_thotapola = LatLng(lat=6.833, lng=80.82)
+
+alts = Alt.list_from_latlng_list(
+    [
+        latlng_piduruthalagala,
+        latlng_kirigalpotta,
+        latlng_thotapola,
+    ]
+)
+
+for alt in alts:
+    print(alt.alt_m)
+
+>> 2513
+>> 2292
+>> 2351
+
 ```
 
 ### [example1_alt_map.py](examples/example1_alt_map.py)

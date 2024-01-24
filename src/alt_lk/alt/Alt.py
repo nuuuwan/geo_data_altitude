@@ -103,7 +103,11 @@ class Alt:
 
     @staticmethod
     @cache
-    def from_latlng(latlng: LatLng) -> float:
+    def from_latlng(latlng: LatLng) -> 'Alt':
         data = Alt.matrix()
         (i_lat, i_lng) = Alt.latlng_to_indices(latlng)
         return Alt(data[i_lat][i_lng])
+
+    @staticmethod
+    def list_from_latlng_list(latlng_list: list[LatLng]) -> list['Alt']:
+        return [Alt.from_latlng(latlng) for latlng in latlng_list]
