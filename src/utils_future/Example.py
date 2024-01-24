@@ -7,7 +7,7 @@ log = Log('examples')
 
 
 class Example:
-    DPI = 1_200
+    DPI = 2_400
 
     @staticmethod
     def write(py_file_name: str):
@@ -22,6 +22,7 @@ class Example:
         ax.set_xticks([])
         ax.set_yticks([])
 
+        plt.tight_layout()
         plt.savefig(image_path, dpi=Example.DPI)
         log.info(f'Wrote {image_path}.')
         os.startfile(image_path)

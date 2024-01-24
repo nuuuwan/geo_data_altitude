@@ -1,20 +1,23 @@
 import matplotlib.pyplot as plt
 import numpy as np
-
+import matplotlib.colors as mcolors
 from alt_lk import Alt, BBox, LatLng
 from utils_future import Example
 
 
 def main():
     bbox = BBox(
-        LatLng(6.91966959592014, 80.75296449863315),
-        LatLng(6.988336872509167, 80.82439013020513),
+        LatLng(6.902851424723703, 80.58878931660789), # Hatton
+        LatLng(7.112105098302233, 80.92204999330954), # Thiripaha
     )
     data = Alt.get_matrix_subset(bbox)
     arr = np.array(data)
+    # arr = np.power(arr, 2.5)
+    
+    colors = ["darkgreen", "green", "yellow", "orange", "red", "brown"] 
+    cmap = mcolors.LinearSegmentedColormap.from_list('custom', colors)
 
-    plt.imshow(arr, cmap='coolwarm')
-    plt.colorbar()
+    plt.imshow(arr, cmap=cmap)
     Example.write(__file__)
 
 

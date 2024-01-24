@@ -56,7 +56,7 @@ class Alt:
     @staticmethod
     @cache
     def matrix():
-        log.warning('[🐢slow] Loading matrix...')
+        log.warning('🐢 Loading matrix...')
         if Alt.LOCAL_COMBINED_DATA_FILE.exists:
             return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
