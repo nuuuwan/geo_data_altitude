@@ -56,16 +56,18 @@ class Alt:
     @staticmethod
     @cache
     def matrix():
-        log.warning('🐢 Loading matrix...')
+        log.debug('Loading matrix...')
         if Alt.LOCAL_COMBINED_DATA_FILE.exists:
+            log.debug(f'Loading {Alt.LOCAL_COMBINED_DATA_FILE_PATH}...')
             return Alt.LOCAL_COMBINED_DATA_FILE.read()
 
         if Alt.COMBINED_DATA_FILE.exists:
+            log.debug(f'Loading {Alt.COMBINED_DATA_FILE_PATH}...')
             data = Alt.COMBINED_DATA_FILE.read()
             Alt.LOCAL_COMBINED_DATA_FILE.write(data)
             return data
 
-        log.info(f'Downloading data from {Alt.URL_COMBILED_DATA} ...')
+        log.info(f'Downloading from {Alt.URL_COMBILED_DATA} ...')
         WWW.download_binary(
             Alt.URL_COMBILED_DATA, Alt.LOCAL_COMBINED_DATA_FILE_PATH
         )
