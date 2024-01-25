@@ -27,9 +27,7 @@ def main():
     slope[slope > LIMIT] = LIMIT
     slope[slope < -LIMIT] = -LIMIT
 
-    plt.imshow(slope, cmap='bwr')
-    plt.colorbar()
-    Example.write(__file__)
+    Example.write(slope, __file__)
 
 
 if __name__ == '__main__':

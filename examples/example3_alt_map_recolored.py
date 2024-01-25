@@ -21,8 +21,7 @@ def main():
             break
         i += 1
 
-    plt.imshow(arr, cmap='Spectral')
-    Example.write(__file__)
+    Example.write(arr, __file__)
 
 
 if __name__ == '__main__':

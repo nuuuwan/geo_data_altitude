@@ -13,9 +13,7 @@ def main():
     data = Alt.get_matrix_subset(bbox)
     arr = np.array(data)
 
-    plt.imshow(arr, cmap='coolwarm')
-    plt.colorbar()
-    Example.write(__file__)
+    Example.write(arr, __file__)
 
 
 if __name__ == '__main__':
