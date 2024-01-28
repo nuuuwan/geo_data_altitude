@@ -1,10 +1,9 @@
-import matplotlib.pyplot as plt
 import numpy as np
 from scipy.ndimage import convolve
 
 from alt_lk import Alt
-from utils_future import Example
-
+from utils_future import PltX
+import matplotlib.pyplot as plt
 
 def main():
     data = Alt.matrix()
@@ -27,7 +26,9 @@ def main():
     slope[slope > LIMIT] = LIMIT
     slope[slope < -LIMIT] = -LIMIT
 
-    Example.write(slope, __file__)
+    plt.imshow(slope, cmap='viridis')
+
+    PltX.write(__file__)
 
 
 if __name__ == '__main__':

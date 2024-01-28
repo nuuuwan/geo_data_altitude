@@ -1,8 +1,7 @@
 import numpy as np
-
+import matplotlib.pyplot as plt
 from alt_lk import Alt
-from utils_future import Example
-
+from utils_future import PltX
 
 
 def main():
@@ -11,7 +10,10 @@ def main():
 
     arr[arr <= 0] = -100
 
-    Example.write(arr, __file__)
+    plt.imshow(arr, cmap='viridis')
+    plt.colorbar()
+
+    PltX.write(__file__)
 
 
 if __name__ == '__main__':

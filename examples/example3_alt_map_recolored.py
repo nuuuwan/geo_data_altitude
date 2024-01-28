@@ -1,9 +1,8 @@
-import matplotlib.pyplot as plt
 import numpy as np
 
 from alt_lk import Alt
-from utils_future import Example
-
+from utils_future import PltX
+import matplotlib.pyplot as plt
 
 def main():
     data = Alt.matrix()
@@ -21,7 +20,9 @@ def main():
             break
         i += 1
 
-    Example.write(arr, __file__)
+    plt.imshow(arr, cmap='viridis')
+
+    PltX.write(__file__)
 
 
 if __name__ == '__main__':
