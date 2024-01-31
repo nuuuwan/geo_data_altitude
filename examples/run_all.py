@@ -1,10 +1,7 @@
-from examples import (example1_alt_map, example2_slope_map,
-                      example3_alt_map_recolored)
+from examples import (example0, example1_lkmap_2d, example2_lkmap_3d)
 
 EXAMPLES_LIST = [
-    example1_alt_map,
-    example2_slope_map,
-    example3_alt_map_recolored,
+    example0, example1_lkmap_2d, example2_lkmap_3d
 ]
 
 

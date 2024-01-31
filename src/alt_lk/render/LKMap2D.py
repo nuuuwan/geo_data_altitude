@@ -16,5 +16,9 @@ class LKMap2D(AbstractPlot):
 
         arr[arr <= 0] = -1
 
+        ax = plt.gca()
+        ax.set_xlabel('y')
+        ax.set_ylabel('x')
+        
         plt.imshow(arr, cmap=self.cmap)
         plt.colorbar()

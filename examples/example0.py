@@ -1,4 +1,4 @@
-if __name__ == '__main__':
+def main():
     from alt_lk import Alt, LatLng
 
     latlng_sri_paada = LatLng(6.809498226498262, 80.49925188865949)
@@ -23,3 +23,6 @@ if __name__ == '__main__':
 
     for alt in alts:
         print(alt.alt_m)
+
+if __name__ == '__main__':
+    main()

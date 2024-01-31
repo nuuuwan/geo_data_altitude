@@ -22,6 +22,6 @@ class LKMap3D(AbstractPlot):
             alt,
             cmap=self.cmap,
         )
-        ax.set_xlabel('lat')
-        ax.set_ylabel('lng')
+        ax.set_xlabel('y')
+        ax.set_ylabel('x')
         ax.set_zlabel('alt')
