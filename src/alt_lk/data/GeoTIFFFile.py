@@ -1,6 +1,7 @@
 import os
 from functools import cached_property
 
+import numpy as np
 import rasterio
 from utils import Log
 
@@ -44,7 +45,7 @@ class GeoTIFFFile(File):
             GeoTIFFFile.get_path_from_latlng(latlng, resolution))
 
     @cached_property
-    def data(self) -> list[list[float]]:
+    def data(self) -> np.array:
         if not os.path.exists(self.path):
             raise FileNotFoundError
 
@@ -54,4 +55,4 @@ class GeoTIFFFile(File):
         dim_x = len(data)
         dim_y = len(data[0])
         assert dim_x == dim_y == self.resolution.dim1
-        return data
+        return np.array(data)

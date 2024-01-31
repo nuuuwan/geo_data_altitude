@@ -28,7 +28,7 @@ class AltFile(SparseArrayFile):
             AltFile.get_path_from_latlng_and_resolution(latlng, resolution))
 
     @staticmethod
-    def get_empty_data(resolution: Resolution) -> list[list[float]]:
+    def get_empty_data(resolution: Resolution) -> np.array:
         return np.array([[0] * resolution.dim1] * resolution.dim1)
 
     @staticmethod
@@ -64,7 +64,7 @@ class AltFile(SparseArrayFile):
     @staticmethod
     @cache
     def get_combined_data(
-            bbox: BBox, resolution: Resolution) -> list[list[float]]:
+            bbox: BBox, resolution: Resolution) -> np.array:
         min_latlng, max_latlng = bbox.tuple
         min_lat, min_lng = min_latlng.tuple
         max_lat, max_lng = max_latlng.tuple
@@ -92,4 +92,4 @@ class AltFile(SparseArrayFile):
         assert dim_x == dim1 * (max_lat - min_lat + 1)
         assert dim_y == dim1 * (max_lng - min_lng + 1)
 
-        return data
+        return matrix_block
