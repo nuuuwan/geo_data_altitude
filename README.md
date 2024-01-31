@@ -51,21 +51,6 @@ for alt in alts:
 
 ```
 
-### [example1_alt_map.py](examples/example1_alt_map.py)
-
-![example1_alt_map.py](examples/images/example1_alt_map.py.png)
-
-[examples]  Wrote examples\images\example2_slope_map.py.png.
-
-### [example2_slope_map.py](examples/example2_slope_map.py)
-
-![example2_slope_map.py](examples/images/example2_slope_map.py.png)
-
-[examples]  Wrote examples\images\example3_alt_map_recolored.py.png.
-
-### [example3_alt_map_recolored.py](examples/example3_alt_map_recolored.py)
-
-![example3_alt_map_recolored.py](examples/images/example3_alt_map_recolored.py.png)
 
 ## Data
 

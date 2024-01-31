@@ -5,7 +5,6 @@ EXAMPLES_LIST = [
     example1_alt_map,
     example2_slope_map,
     example3_alt_map_recolored,
-
 ]
 
 
