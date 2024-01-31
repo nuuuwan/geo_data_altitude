@@ -10,7 +10,8 @@ def main():
         image_path = os.path.join(
             'examples', 'images', f'example1_lkmap_3d.{place_id}.png'
         )
-        LKMap3D(bbox).write(image_path)
+        LKMap3D(bbox).write(place, image_path)
+
 
 
 if __name__ == '__main__':

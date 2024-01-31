@@ -37,9 +37,14 @@ class AbstractPlot:
         plt.savefig(image_path, dpi=AbstractPlot.DPI)
         log.info(f'Wrote {image_path}.')
         os.startfile(image_path)
-        plt.close()
-
-    def write(self, image_path: str):
+     
+    def write(self, place: str, image_path: str):
+        if os.path.exists(image_path):
+            log.info(f'Already exists: {image_path}')
+            return
+        plt.title(place)
+        self.remove_axes()
         self.build_plot()
         self.set_tight_layout()
         self.save_and_start(image_path)
+        plt.close()

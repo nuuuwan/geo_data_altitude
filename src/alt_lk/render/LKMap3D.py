@@ -14,7 +14,11 @@ class LKMap3D(AbstractPlot):
         data = Alt.get_matrix_subset(self.bbox)
         alt = np.array(data)
         lat, lng = np.mgrid[: alt.shape[0], : alt.shape[1]]
-
+        
+        # dim_lat, dim_lng = alt.shape
+        # lat = lat / dim_lat * self.bbox.lat_span - self.bbox.max_lat
+        # lng = lng / dim_lng * self.bbox.lng_span + self.bbox.min_lng
+        
         ax = plt.axes(projection='3d')
         ax.plot_surface(
             lat,
@@ -22,6 +26,7 @@ class LKMap3D(AbstractPlot):
             alt,
             cmap=self.cmap,
         )
-        ax.set_xlabel('y')
-        ax.set_ylabel('x')
+        ax.view_init(azim=-45, elev=67.5)
+        ax.set_xlabel('lat')
+        ax.set_ylabel('lng')
         ax.set_zlabel('alt')
