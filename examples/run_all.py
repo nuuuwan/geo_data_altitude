@@ -1,8 +1,6 @@
-from examples import (example0, example1_lkmap_2d, example2_lkmap_3d)
+from examples import example1, example2_map_2d, example3_map_3d
 
-EXAMPLES_LIST = [
-    example0, example1_lkmap_2d, example2_lkmap_3d
-]
+EXAMPLES_LIST = [example1, example2_map_2d, example3_map_3d]
 
 
 def main():

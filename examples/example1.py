@@ -24,5 +24,6 @@ def main():
     for alt in alts:
         print(alt.alt_m)
 
+
 if __name__ == '__main__':
     main()

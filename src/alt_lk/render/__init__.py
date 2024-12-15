@@ -1,2 +1,2 @@
-from alt_lk.render.LKMap2D import LKMap2D
-from alt_lk.render.LKMap3D import LKMap3D
+from alt_lk.render.Map2D import Map2D
+from alt_lk.render.Map3D import Map3D
