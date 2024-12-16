@@ -18,14 +18,19 @@ class AltFile(SparseArrayFile):
 
     @staticmethod
     def get_path_from_latlng_and_resolution(
-            latlng: LatLng, resolution: Resolution):
-        return os.path.join(AltFile.DIR_ALT, resolution.file_code,
-                            f'alt.{latlng.str_03d}.{resolution.file_code}.npz')
+        latlng: LatLng, resolution: Resolution
+    ):
+        return os.path.join(
+            AltFile.DIR_ALT,
+            resolution.file_code,
+            f'alt.{latlng.str_03d}.{resolution.file_code}.npz',
+        )
 
     @staticmethod
     def from_latlng_and_resolution(latlng: LatLng, resolution: Resolution):
         return AltFile(
-            AltFile.get_path_from_latlng_and_resolution(latlng, resolution))
+            AltFile.get_path_from_latlng_and_resolution(latlng, resolution)
+        )
 
     @staticmethod
     def get_empty_data(resolution: Resolution) -> np.array:
@@ -35,7 +40,8 @@ class AltFile(SparseArrayFile):
     def from_geotiff(geotiff: GeoTIFFFile):
         data = geotiff.data
         json_alt_file = AltFile.from_latlng_and_resolution(
-            geotiff.latlng, geotiff.resolution)
+            geotiff.latlng, geotiff.resolution
+        )
 
         if not os.path.exists(AltFile.DIR_ALT):
             os.makedirs(AltFile.DIR_ALT)
@@ -63,8 +69,7 @@ class AltFile(SparseArrayFile):
 
     @staticmethod
     @cache
-    def get_combined_data(
-            bbox: BBox, resolution: Resolution) -> np.array:
+    def get_combined_data(bbox: BBox, resolution: Resolution) -> np.array:
         min_latlng, max_latlng = bbox.tuple
         min_lat, min_lng = min_latlng.tuple
         max_lat, max_lng = max_latlng.tuple
@@ -73,14 +78,16 @@ class AltFile(SparseArrayFile):
             matrix_row = []
             for lng in range(min_lng, max_lng + 1):
                 json_alt_file = AltFile.from_latlng_and_resolution(
-                    LatLng(lat, lng), resolution)
+                    LatLng(lat, lng), resolution
+                )
 
                 if os.path.exists(json_alt_file.path):
                     matrix = np.array(json_alt_file.read())
                 else:
                     matrix = AltFile.get_empty_data(resolution)
                     log.warning(
-                        f'No AltFile for {LatLng(lat, lng)} / {resolution}')
+                        f'No AltFile for {LatLng(lat, lng)} / {resolution}'
+                    )
 
                 matrix_row.append(matrix)
             matrix_block.append(matrix_row)

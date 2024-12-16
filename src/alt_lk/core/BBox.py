@@ -1,4 +1,3 @@
-import webbrowser
 from dataclasses import dataclass
 from functools import cached_property
 
@@ -50,14 +49,11 @@ class BBox:
 
     def get_plng(self, lng: float):
         return (lng - self.min_lng) / self.lng_span
-    
 
     @staticmethod
     def from_point(latlng: LatLng, span: float = 0.1):
-        
+
         return BBox(
             LatLng(latlng.lat - span, latlng.lng - span),
             LatLng(latlng.lat + span, latlng.lng + span),
         )
-
-   

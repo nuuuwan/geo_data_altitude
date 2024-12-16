@@ -1,14 +1,13 @@
 from alt_lk import BBox, LatLng
 
 PLACE_TO_LATLNG_TUPLE = {
-    
     "Ampara": (7.291127418821822, 81.67237724952236),
     "Anuradhapura": (8.331912956556954, 80.40300409534629),
     "Badulla": (6.984487889927144, 81.05820857055063),
     "Batticaloa": (7.717979543494548, 81.69892054485362),
     "Colombo": (6.9172805808976365, 79.86479120304936),
     "Galle": (6.032620592219266, 80.21677488079136),
-    "Gampaha": (7.091109076405228, 79.9994125519898), 
+    "Gampaha": (7.091109076405228, 79.9994125519898),
     "Hambantota": (6.124897308607071, 81.125977335702135),
     "Jaffna": (9.665122874373612, 80.00933441092045),
     "Kalutara": (6.586936411846648, 79.96009834415655),
@@ -27,7 +26,9 @@ PLACE_TO_LATLNG_TUPLE = {
     "Ratnapura": (6.705530874833053, 80.38485284857987),
     "Trincomalee": (8.587299775803805, 81.2151463476689),
     "Vavuniya": (8.759460849584084, 80.50009159673868),
-
 }
 
-PLACE_BBOX_IDX = {place: BBox.from_point(LatLng(*latlng)) for place, latlng in PLACE_TO_LATLNG_TUPLE.items()}
+PLACE_BBOX_IDX = {
+    place: BBox.from_point(LatLng(*latlng))
+    for place, latlng in PLACE_TO_LATLNG_TUPLE.items()
+}

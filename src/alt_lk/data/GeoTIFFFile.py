@@ -33,16 +33,20 @@ class GeoTIFFFile(File):
 
     @staticmethod
     def get_path_from_latlng_and_resolution(
-            latlng: LatLng, resolution: Resolution):
+        latlng: LatLng, resolution: Resolution
+    ):
         lat, lng = latlng.tuple
-        return os.path.join(GeoTIFFFile.DIR_ALT_TIF,
-                            resolution.file_code,
-                            f'n{lat:02d}_e{lng:03d}_{resolution.file_code}.tif')
+        return os.path.join(
+            GeoTIFFFile.DIR_ALT_TIF,
+            resolution.file_code,
+            f'n{lat:02d}_e{lng:03d}_{resolution.file_code}.tif',
+        )
 
     @staticmethod
     def from_latlng_and_resolution(latlng: LatLng, resolution: Resolution):
         return GeoTIFFFile(
-            GeoTIFFFile.get_path_from_latlng(latlng, resolution))
+            GeoTIFFFile.get_path_from_latlng(latlng, resolution)
+        )
 
     @cached_property
     def data(self) -> np.array:
