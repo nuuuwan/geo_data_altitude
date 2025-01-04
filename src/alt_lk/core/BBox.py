@@ -15,7 +15,7 @@ class BBox:
 
     def __str__(self) -> str:
         norm = self.norm
-        return f'BBox({norm.min_latlng}, {norm.max_latlng})'
+        return f"BBox({norm.min_latlng}, {norm.max_latlng})"
 
     def __hash__(self) -> int:
         return hash(self.tuple)
