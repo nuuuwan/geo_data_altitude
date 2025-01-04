@@ -15,11 +15,11 @@ def main():
     dir_group = os.path.join("examples", "images", "example5_derivative")
     os.makedirs(dir_group, exist_ok=True)
 
-    place_name = "Sri Lanka"
-    bbox = BBox(LatLng(5.9, 79.5), LatLng(9.9, 81.9))
+    # place_name = "Sri Lanka"
+    # bbox = BBox(LatLng(5.9, 79.5), LatLng(9.9, 81.9))
 
-    # place_name = "Nuwara Eliya"
-    # bbox = PLACE_BBOX_IDX[place_name]
+    place_name = "Nuwara Eliya"
+    bbox = PLACE_BBOX_IDX[place_name]
 
     SIZE = 10
     log.debug(f"{place_name=}")

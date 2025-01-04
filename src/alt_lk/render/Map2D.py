@@ -12,24 +12,13 @@ log = Log("Map2D")
 class Map2D(AbstractPlot):
     @property
     def cmap(self):
-        # Define custom colormap
-        cdict = {
-            "red": [(0.0, 0.0, 0.0), (0.5, 1.0, 1.0), (1.0, 1.0, 1.0)],
-            "green": [(0.0, 0.0, 0.0), (0.5, 1.0, 1.0), (1.0, 0.0, 0.0)],
-            "blue": [(0.0, 1.0, 1.0), (0.5, 1.0, 1.0), (1.0, 0.0, 0.0)],
-        }
-        return LinearSegmentedColormap("CustomMap", cdict)
+        return "seismic"
 
     def build_plot(self):
         log.debug("build_plot")
+        alt = self.alt or Alt.get_matrix_subset(self.bbox)
+        alt = self.get_mapped_alt(alt) if self.get_mapped_alt else alt
 
-        if self.alt is None:
-            alt = Alt.get_matrix_subset(self.bbox)
-        else:
-            alt = self.alt
-
-        if self.get_mapped_alt is not None:
-            alt = self.get_mapped_alt(alt)
         log.debug(f"alt.shape={alt.shape}")
         lat, lng = np.mgrid[: alt.shape[0], : alt.shape[1]]
 
